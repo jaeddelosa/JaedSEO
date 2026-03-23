@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JaedSEO Analyzer Pro</title>
+<title>JaedSEO Analyzer Pro — Enhanced</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
 
@@ -11,7 +11,7 @@
   --bg:#07090d; --sur:#0d1018; --sur2:#131720; --sur3:#181e2a;
   --bdr:#1d2333; --bdr2:#28334a;
   --acc:#00e5ff; --acc2:rgba(0,229,255,.1);
-  --grn:#00d084; --ylw:#f5c518; --red:#ff3e5e; --pur:#a78bfa;
+  --grn:#00d084; --ylw:#f5c518; --red:#ff3e5e; --pur:#a78bfa; --org:#ff8c42;
   --txt:#d8e0ee; --txt2:#7a8699; --mut:#3d4a5c;
   --mono:'Space Mono','Courier New',monospace;
   --sans:'Inter',system-ui,sans-serif;
@@ -29,7 +29,7 @@ header{padding:48px 0 30px;text-align:center}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,229,255,.5)}50%{box-shadow:0 0 0 12px rgba(0,229,255,0)}}
 h1{font-family:var(--mono);font-size:clamp(20px,3vw,38px);font-weight:700;letter-spacing:-1px;line-height:1.1}
 h1 em{color:var(--acc);font-style:normal}
-.sub{color:var(--txt2);font-size:13px;margin-top:8px;font-weight:300}
+.hdr-sub{color:var(--txt2);font-size:13px;margin-top:8px;font-weight:300}
 
 /* INPUT PANEL */
 .panel{background:var(--sur);border:1px solid var(--bdr);border-radius:12px;padding:24px;margin-bottom:24px;position:relative;overflow:hidden}
@@ -62,6 +62,13 @@ h1 em{color:var(--acc);font-style:normal}
 .a-err pre{margin-top:8px;font-family:var(--mono);font-size:10px;white-space:pre-wrap;opacity:.7;background:rgba(0,0,0,.25);padding:10px;border-radius:5px}
 .a-err code{font-family:var(--mono);background:rgba(0,0,0,.3);padding:1px 5px;border-radius:3px}
 
+/* TABS */
+.tabs-nav{display:flex;gap:4px;margin-bottom:20px;border-bottom:1px solid var(--bdr);padding-bottom:0;flex-wrap:wrap}
+.tab-btn{background:none;border:none;color:var(--txt2);font-family:var(--mono);font-size:10px;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;padding:8px 14px;border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .15s,border-color .15s;white-space:nowrap}
+.tab-btn:hover{color:var(--txt)}
+.tab-btn.active{color:var(--acc);border-bottom-color:var(--acc)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+
 /* RESULTS */
 #results{display:none}
 .rhead{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:10px}
@@ -83,6 +90,14 @@ h1 em{color:var(--acc);font-style:normal}
 .t-r{background:rgba(255,62,94,.12);color:var(--red);border:1px solid rgba(255,62,94,.2)}
 .t-y{background:rgba(245,197,24,.09);color:var(--ylw);border:1px solid rgba(245,197,24,.18)}
 .t-g{background:rgba(0,208,132,.09);color:var(--grn);border:1px solid rgba(0,208,132,.18)}
+.t-b{background:rgba(0,229,255,.07);color:var(--acc);border:1px solid rgba(0,229,255,.15)}
+
+/* DUAL SCORE */
+.score-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.score-card{background:var(--sur);border:1px solid var(--bdr);border-radius:10px;padding:16px 22px;flex:1;min-width:200px;display:flex;align-items:center;gap:14px}
+.score-circle{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:22px;font-weight:700;border:3px solid;flex-shrink:0}
+.score-label{font-family:var(--mono);font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.score-desc{font-size:11px;color:var(--txt2)}
 
 /* SECTION LABEL */
 .sec{font-family:var(--mono);font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.12em;margin:28px 0 12px;display:flex;align-items:center;gap:8px}
@@ -105,6 +120,7 @@ h1 em{color:var(--acc);font-style:normal}
 .b-b{background:rgba(0,229,255,.07);color:var(--acc);border:1px solid rgba(0,229,255,.15)}
 .b-p{background:rgba(167,139,250,.1);color:var(--pur);border:1px solid rgba(167,139,250,.2)}
 .b-m{background:rgba(61,74,92,.15);color:var(--txt2);border:1px solid rgba(61,74,92,.25)}
+.b-o{background:rgba(255,140,66,.1);color:var(--org);border:1px solid rgba(255,140,66,.2)}
 
 /* VALUE STYLES */
 .val{font-family:var(--mono);font-size:12px;color:var(--txt);line-height:1.6;word-break:break-word}
@@ -112,7 +128,7 @@ h1 em{color:var(--acc);font-style:normal}
 .val.miss{color:var(--mut);font-style:italic;font-size:12px}
 .sub{font-size:10px;color:var(--mut);margin-top:4px;font-family:var(--mono)}
 
-/* CONTENT BLOCK — actual content display */
+/* CONTENT BLOCK */
 .content-val{font-size:13px;color:var(--txt);line-height:1.65;word-break:break-word;margin-bottom:6px}
 .content-val.miss{color:var(--mut);font-style:italic}
 .char-bar{height:3px;background:var(--bdr2);border-radius:2px;margin-top:8px;overflow:hidden}
@@ -155,7 +171,7 @@ h1 em{color:var(--acc);font-style:normal}
 .kv-v.miss{color:var(--mut);font-style:italic}
 .kv-v.ok{color:var(--grn)}.kv-v.warn{color:var(--ylw)}.kv-v.bad{color:var(--red)}
 
-/* IMAGE GRID PREVIEW */
+/* IMAGE */
 .img-row{display:flex;align-items:flex-start;gap:10px;padding:7px 0;border-bottom:1px solid var(--bdr);font-size:11px;font-family:var(--mono)}
 .img-row:last-child{border-bottom:none}
 .img-thumb{width:44px;height:44px;object-fit:cover;border-radius:4px;border:1px solid var(--bdr2);flex-shrink:0;background:var(--sur2)}
@@ -175,12 +191,94 @@ h1 em{color:var(--acc);font-style:normal}
 .h4t,.h5t,.h6t{background:rgba(61,74,92,.2);color:var(--txt2)}
 .htxt{color:var(--txt);word-break:break-word;line-height:1.4}
 
+/* SECURITY SPECIFIC */
+.sec-header-row{padding:8px 10px;border-radius:6px;margin-bottom:6px;display:flex;align-items:flex-start;gap:10px;font-family:var(--mono);font-size:11px}
+.sec-header-row.present{background:rgba(0,208,132,.06);border:1px solid rgba(0,208,132,.15)}
+.sec-header-row.missing{background:rgba(255,62,94,.05);border:1px solid rgba(255,62,94,.15)}
+.sec-header-row.warning{background:rgba(245,197,24,.05);border:1px solid rgba(245,197,24,.15)}
+.sec-h-icon{flex-shrink:0;font-size:14px;line-height:1.3}
+.sec-h-name{font-weight:700;font-size:10px;margin-bottom:2px}
+.sec-h-name.ok{color:var(--grn)}.sec-h-name.missing{color:var(--red)}.sec-h-name.warn{color:var(--ylw)}
+.sec-h-val{color:var(--txt2);font-size:10px;word-break:break-all}
+.sec-h-note{color:var(--mut);font-size:9px;margin-top:2px;font-style:italic}
+
+/* RECOMMENDATION CARD */
+.rec-item{padding:12px 14px;border-radius:8px;margin-bottom:8px;border-left:3px solid;font-size:12px;line-height:1.6}
+.rec-item.critical{background:rgba(255,62,94,.06);border-color:var(--red)}
+.rec-item.warning{background:rgba(245,197,24,.05);border-color:var(--ylw)}
+.rec-item.info{background:rgba(0,229,255,.04);border-color:var(--acc)}
+.rec-item.pass{background:rgba(0,208,132,.04);border-color:var(--grn)}
+.rec-title{font-family:var(--mono);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
+.rec-item.critical .rec-title{color:var(--red)}
+.rec-item.warning .rec-title{color:var(--ylw)}
+.rec-item.info .rec-title{color:var(--acc)}
+.rec-item.pass .rec-title{color:var(--grn)}
+.rec-body{color:var(--txt2);font-size:12px}
+.rec-code{font-family:var(--mono);font-size:10px;background:rgba(0,0,0,.3);padding:7px 10px;border-radius:5px;margin-top:7px;white-space:pre-wrap;color:var(--txt);overflow-x:auto}
+
+/* PROGRESS METER */
+.meter{height:6px;background:var(--bdr2);border-radius:3px;overflow:hidden;margin-top:6px}
+.meter-fill{height:100%;border-radius:3px;transition:width .5s ease}
+
+/* READABILITY */
+.rdbl-score{font-family:var(--mono);font-size:36px;font-weight:700;margin-bottom:2px}
+
+/* LOADING OVERLAY for security scan */
+.sec-loading{text-align:center;padding:32px;color:var(--txt2);font-family:var(--mono);font-size:11px}
+.sec-loading .spin{width:20px;height:20px;margin:0 auto 12px;border-width:2px;border-color:var(--bdr2);border-top-color:var(--acc)}
+
+/* NEXT STEPS */
+.roadmap{display:flex;flex-direction:column;gap:0}
+.roadmap-phase{display:flex;gap:0;position:relative}
+.roadmap-phase:not(:last-child)::before{content:'';position:absolute;left:19px;top:38px;bottom:0;width:2px;background:var(--bdr2);z-index:0}
+.rm-dot{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:13px;font-weight:700;flex-shrink:0;border:2px solid;position:relative;z-index:1;margin-top:4px}
+.rm-dot.now{color:var(--red);border-color:var(--red);background:rgba(255,62,94,.1)}
+.rm-dot.soon{color:var(--ylw);border-color:var(--ylw);background:rgba(245,197,24,.08)}
+.rm-dot.later{color:var(--acc);border-color:var(--acc);background:rgba(0,229,255,.06)}
+.rm-dot.ongoing{color:var(--grn);border-color:var(--grn);background:rgba(0,208,132,.07)}
+.rm-body{flex:1;padding:4px 0 24px 16px}
+.rm-phase-label{font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px}
+.rm-phase-label.now{color:var(--red)}
+.rm-phase-label.soon{color:var(--ylw)}
+.rm-phase-label.later{color:var(--acc)}
+.rm-phase-label.ongoing{color:var(--grn)}
+.rm-title{font-size:13px;font-weight:600;color:var(--txt);margin-bottom:5px}
+.rm-items{display:flex;flex-direction:column;gap:3px}
+.rm-item{display:flex;align-items:flex-start;gap:7px;font-family:var(--mono);font-size:10px;color:var(--txt2);line-height:1.5}
+.rm-item::before{content:'\2192';color:var(--mut);flex-shrink:0;margin-top:1px}
+.rm-item.done{color:var(--grn)}
+.rm-item.done::before{content:'\2713';color:var(--grn)}
+.rm-item.urgent{color:var(--txt)}
+
+.checklist{display:flex;flex-direction:column;gap:6px}
+.chk-item{display:flex;align-items:flex-start;gap:10px;padding:9px 12px;border-radius:7px;border:1px solid var(--bdr);background:var(--sur2);font-size:11px;cursor:pointer;transition:border-color .15s,background .15s;user-select:none}
+.chk-item:hover{border-color:var(--bdr2);background:var(--sur3)}
+.chk-item.checked{border-color:rgba(0,208,132,.2);background:rgba(0,208,132,.04)}
+.chk-box{width:16px;height:16px;border-radius:3px;border:2px solid var(--bdr2);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .15s}
+.chk-item.checked .chk-box{background:var(--grn);border-color:var(--grn);color:#000;font-size:10px}
+.chk-label{flex:1;line-height:1.5}
+.chk-label strong{color:var(--txt);display:block;font-size:11px;margin-bottom:1px}
+.chk-label span{color:var(--txt2);font-size:10px}
+.chk-pri{font-family:var(--mono);font-size:8px;padding:2px 5px;border-radius:3px;flex-shrink:0;margin-top:2px}
+.pri-now{background:rgba(255,62,94,.12);color:var(--red);border:1px solid rgba(255,62,94,.2)}
+.pri-soon{background:rgba(245,197,24,.09);color:var(--ylw);border:1px solid rgba(245,197,24,.18)}
+.pri-later{background:rgba(0,229,255,.07);color:var(--acc);border:1px solid rgba(0,229,255,.15)}
+
+.progress-ring{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.progress-ring svg{transform:rotate(-90deg)}
+.progress-ring-label{position:absolute;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--acc)}
+
 /* SCROLLBARS */
 ::-webkit-scrollbar{width:4px;height:4px}
 ::-webkit-scrollbar-track{background:var(--sur)}
 ::-webkit-scrollbar-thumb{background:var(--bdr2);border-radius:2px}
 
 footer{text-align:center;padding:36px 0 52px;color:var(--mut);font-size:11px;font-family:var(--mono)}
+
+/* Tooltip */
+.tip{position:relative;cursor:help}
+.tip::after{content:attr(data-tip);position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);background:#1a2235;border:1px solid var(--bdr2);color:var(--txt2);font-family:var(--mono);font-size:10px;padding:5px 9px;border-radius:5px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .15s;z-index:100;max-width:260px;white-space:normal;text-align:center}
+.tip:hover::after{opacity:1}
 </style>
 </head>
 <body>
@@ -188,8 +286,8 @@ footer{text-align:center;padding:36px 0 52px;color:var(--mut);font-size:11px;fon
 
 <header>
   <div class="logo-box">SEO</div>
-  <h1>On-Page <em>SEO</em> Analyzer</h1>
-  <p class="sub">Every tag, every link, every image — fully inspected &nbsp;·&nbsp; All analysis runs in your browser</p>
+  <h1>On-Page <em>SEO</em> + Security Analyzer</h1>
+  <p class="hdr-sub">Deep SEO analysis · Security scanning · Readability · Actionable next steps &nbsp;·&nbsp; Instant results, zero upload</p>
 </header>
 
 <div class="panel">
@@ -215,7 +313,7 @@ footer{text-align:center;padding:36px 0 52px;color:var(--mut);font-size:11px;fon
 <div id="results"></div>
 
 </div>
-<footer>SEO Analyzer Pro &mdash; 100% client-side. Zero data sent to any server.</footer>
+<footer>JaedSEO Analyzer Pro &mdash; 100% client-side &middot; Zero data sent to any server &middot; Instant deep analysis</footer>
 
 <script>
 'use strict';
@@ -269,7 +367,7 @@ function safe(fn,fb){try{return fn();}catch(e){return fb===undefined?null:fb;}}
 function escRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}
 
 /* ============================================================
-   FETCH
+   FETCH PAGE HTML
 ============================================================ */
 function fetchPage(url){
   var errors=[];
@@ -300,6 +398,50 @@ function fetchPage(url){
 }
 
 /* ============================================================
+   FETCH SECURITY HEADERS via securityheaders.com API
+   (Public free endpoint — no key needed)
+============================================================ */
+function fetchSecurityHeaders(url){
+  // securityheaders.com has a public JSON endpoint
+  var apiUrl='https://api.allorigins.win/get?url='+encodeURIComponent('https://securityheaders.com/?q='+encodeURIComponent(url)+'&followRedirects=on')+'&disableCache=true';
+  return withTimeout(fetch(apiUrl,{cache:'no-store'}),12000)
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(!j||!j.contents)return null;
+      // Parse the grade from the response
+      var html=j.contents;
+      var gradeMatch=/class="[^"]*grade[^"]*">([A-F][+\-]?)<\/span>/i.exec(html)||
+                     /score-([a-f])["\s]/i.exec(html)||
+                     /"grade":"([A-F][+\-]?)"/i.exec(html);
+      var grade=gradeMatch?gradeMatch[1].toUpperCase():null;
+      return {grade:grade, raw:html, source:'securityheaders.com'};
+    })
+    .catch(function(){return null;});
+}
+
+/* ============================================================
+   FETCH IP / DOMAIN INFO via ipapi.co (free, no key)
+============================================================ */
+function fetchIpInfo(hostname){
+  return withTimeout(fetch('https://ipapi.co/'+encodeURIComponent(hostname)+'/json/',{cache:'no-store'}),8000)
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(j&&j.error)return null;
+      return {
+        ip:j.ip||null,
+        city:j.city||null,
+        region:j.region||null,
+        country:j.country_name||null,
+        org:j.org||null,
+        timezone:j.timezone||null,
+        latitude:j.latitude||null,
+        longitude:j.longitude||null
+      };
+    })
+    .catch(function(){return null;});
+}
+
+/* ============================================================
    RESOLVE URL
 ============================================================ */
 function resolveUrl(href,base){
@@ -312,7 +454,187 @@ function resolveUrl(href,base){
 }
 
 /* ============================================================
-   ANALYSIS ENGINE
+   READABILITY SCORE (Flesch-Kincaid approximation)
+============================================================ */
+function calcReadability(text){
+  if(!text||text.length<50)return null;
+  var sentences=text.split(/[.!?]+/).filter(function(s){return s.trim().length>0;});
+  var words=text.split(/\s+/).filter(function(w){return w.length>0;});
+  var syllables=words.reduce(function(acc,word){
+    word=word.toLowerCase().replace(/[^a-z]/g,'');
+    if(!word)return acc;
+    var count=word.match(/[aeiouy]{1,2}/g);
+    var syl=(count?count.length:1);
+    if(word.length>2&&word[word.length-1]==='e')syl=Math.max(1,syl-1);
+    return acc+Math.max(1,syl);
+  },0);
+  if(!words.length||!sentences.length)return null;
+  var asl=words.length/sentences.length;
+  var asw=syllables/words.length;
+  var fk=206.835-(1.015*asl)-(84.6*asw);
+  fk=Math.max(0,Math.min(100,Math.round(fk)));
+  var grade;
+  if(fk>=90)grade='Very Easy';
+  else if(fk>=80)grade='Easy';
+  else if(fk>=70)grade='Fairly Easy';
+  else if(fk>=60)grade='Standard';
+  else if(fk>=50)grade='Fairly Difficult';
+  else if(fk>=30)grade='Difficult';
+  else grade='Very Difficult';
+  var avgSentLen=Math.round(asl);
+  return{score:fk,grade:grade,words:words.length,sentences:sentences.length,avgSentLen:avgSentLen,syllables:syllables};
+}
+
+/* ============================================================
+   SECURITY ANALYSIS (from HTML)
+============================================================ */
+function analyzeSecurityFromHtml(doc, pageUrl, rawHtml){
+  var sec={};
+  var isHttps=(safe(function(){return new URL(pageUrl).protocol==='https:';},false));
+
+  /* Security headers we can detect from HTML meta http-equiv */
+  var httpEquivMeta={};
+  safe(function(){
+    var metas=doc.querySelectorAll('meta[http-equiv]');
+    Array.prototype.forEach.call(metas,function(m){
+      var k=(m.getAttribute('http-equiv')||'').toLowerCase().trim();
+      var v=(m.getAttribute('content')||'').trim();
+      if(k)httpEquivMeta[k]=v;
+    });
+  });
+
+  sec.cspMeta=httpEquivMeta['content-security-policy']||null;
+  sec.xFrameMeta=httpEquivMeta['x-frame-options']||null;
+  sec.referrerMeta=httpEquivMeta['referrer-policy']||
+    safe(function(){var e=doc.querySelector('meta[name="referrer"]');return e?e.getAttribute('content'):null;})||null;
+
+  /* Detect inline event handlers (XSS risk signals) */
+  sec.inlineEventHandlers=safe(function(){
+    var evts=['onclick','onmouseover','onload','onerror','onfocus','onblur','onchange','onsubmit','onkeydown','onkeyup'];
+    var count=0;var list=[];
+    var all=doc.querySelectorAll('*');
+    Array.prototype.forEach.call(all,function(el){
+      evts.forEach(function(ev){
+        if(el.hasAttribute(ev)){count++;if(list.length<10)list.push({tag:el.tagName.toLowerCase(),attr:ev,val:trunc(el.getAttribute(ev)||'',60)});}
+      });
+    });
+    return{count:count,list:list};
+  },{count:0,list:[]});
+
+  /* Detect eval / document.write in inline scripts */
+  sec.dangerousJs=safe(function(){
+    var issues=[];
+    var scripts=doc.querySelectorAll('script:not([src])');
+    Array.prototype.forEach.call(scripts,function(s){
+      var code=s.textContent||'';
+      if(/\beval\s*\(/.test(code))issues.push('eval()');
+      if(/document\.write\s*\(/.test(code))issues.push('document.write()');
+      if(/innerHTML\s*=/.test(code))issues.push('innerHTML assignment');
+    });
+    return{count:issues.length,issues:[...new Set(issues)]};
+  },{count:0,issues:[]});
+
+  /* Forms: check for action pointing to HTTP on an HTTPS page */
+  sec.forms=safe(function(){
+    var forms=Array.prototype.slice.call(doc.querySelectorAll('form'));
+    var insecure=[];
+    forms.forEach(function(f){
+      var action=(f.getAttribute('action')||'').trim();
+      var method=(f.getAttribute('method')||'GET').toUpperCase();
+      var hasAutocomplete=f.getAttribute('autocomplete');
+      var resolved=action?resolveUrl(action,pageUrl):null;
+      var isInsecure=resolved&&/^http:/i.test(resolved)&&isHttps;
+      var passwordFields=f.querySelectorAll('input[type="password"]').length;
+      if(isInsecure)insecure.push({action:action,method:method});
+      return{action:action,method:method,isInsecure:isInsecure,passwordFields:passwordFields,hasAutocomplete:hasAutocomplete};
+    });
+    return{total:forms.length,insecure:insecure.length,insecureList:insecure};
+  },{total:0,insecure:0,insecureList:[]});
+
+  /* Password fields without autocomplete=off */
+  sec.passwordFields=safe(function(){
+    var pf=doc.querySelectorAll('input[type="password"]');
+    var withoutOff=0;
+    Array.prototype.forEach.call(pf,function(f){
+      if((f.getAttribute('autocomplete')||'').indexOf('off')===-1)withoutOff++;
+    });
+    return{total:pf.length,withoutAutocompleteOff:withoutOff};
+  },{total:0,withoutAutocompleteOff:0});
+
+  /* iFrames: sandboxed? */
+  sec.iframes=safe(function(){
+    var iframes=Array.prototype.slice.call(doc.querySelectorAll('iframe'));
+    var unsandboxed=iframes.filter(function(f){return !f.hasAttribute('sandbox');}).length;
+    var list=iframes.slice(0,10).map(function(f){
+      return{src:f.getAttribute('src')||'',sandboxed:f.hasAttribute('sandbox'),sandbox:f.getAttribute('sandbox')||null};
+    });
+    return{total:iframes.length,unsandboxed:unsandboxed,list:list};
+  },{total:0,unsandboxed:0,list:[]});
+
+  /* External scripts from suspicious TLDs or CDNs */
+  sec.thirdPartyScripts=safe(function(){
+    var pageHost=safe(function(){return new URL(pageUrl).hostname;},'');
+    var scripts=Array.prototype.slice.call(doc.querySelectorAll('script[src]'));
+    var external=[];
+    scripts.forEach(function(s){
+      var src=s.getAttribute('src')||'';
+      var resolved=resolveUrl(src,pageUrl);
+      if(!resolved)return;
+      try{
+        var h=new URL(resolved).hostname;
+        if(h!==pageHost){
+          var hasSri=s.hasAttribute('integrity');
+          external.push({src:trunc(resolved,80),hasSri:hasSri,host:h});
+        }
+      }catch(e){}
+    });
+    var missingIntegrity=external.filter(function(e){return !e.hasSri;}).length;
+    return{total:external.length,missingIntegrity:missingIntegrity,list:external.slice(0,20)};
+  },{total:0,missingIntegrity:0,list:[]});
+
+  /* HTTPS check */
+  sec.isHttps=isHttps;
+  sec.hasHsts=!!httpEquivMeta['strict-transport-security'];
+
+  /* Detect generator tag leaking tech stack */
+  sec.generatorLeaking=safe(function(){
+    var g=doc.querySelector('meta[name="generator"]');
+    return g?(g.getAttribute('content')||'').trim():null;
+  },null);
+
+  /* Comment snooping: count HTML comments that may leak info */
+  sec.htmlComments=safe(function(){
+    var re=/<!--([\s\S]*?)-->/g;
+    var matches=[];var m;
+    while((m=re.exec(rawHtml))!==null&&matches.length<10){
+      var txt=m[1].trim();
+      if(txt.length>5)matches.push(trunc(txt,120));
+    }
+    return{count:matches.length,list:matches};
+  },{count:0,list:[]});
+
+  /* Detect sensitive info patterns in HTML */
+  sec.sensitivePatterns=safe(function(){
+    var patterns=[
+      {name:'Email address',re:/[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}/g},
+      {name:'AWS Key pattern',re:/AKIA[0-9A-Z]{16}/g},
+      {name:'API key pattern',re:/["\']?api[_\-]?key["\']?\s*[:=]\s*["']?[A-Za-z0-9\-_]{16,}/gi},
+      {name:'Private key marker',re:/-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----/g},
+      {name:'Internal IP',re:/\b(10\.\d{1,3}\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})\b/g}
+    ];
+    var found=[];
+    patterns.forEach(function(p){
+      var matches=rawHtml.match(p.re)||[];
+      if(matches.length)found.push({name:p.name,count:matches.length,examples:matches.slice(0,3).map(function(m){return trunc(m,60);})});
+    });
+    return found;
+  },[]);
+
+  return sec;
+}
+
+/* ============================================================
+   ANALYSIS ENGINE (SEO)
 ============================================================ */
 function analyze(rawHtml, pageUrl, keyword){
   var d={};
@@ -322,7 +644,6 @@ function analyze(rawHtml, pageUrl, keyword){
   var doc=safe(function(){return (new DOMParser()).parseFromString(rawHtml,'text/html');});
   if(!doc)throw new Error('DOMParser failed');
 
-  // Inject base for relative URL resolution
   safe(function(){
     if(!doc.querySelector('base')){
       var b=doc.createElement('base');b.href=pageUrl;
@@ -336,23 +657,12 @@ function analyze(rawHtml, pageUrl, keyword){
   /* 1. TITLE */
   var titleEl=doc.querySelector('title');
   var titleText=safe(function(){return titleEl?titleEl.textContent.trim():null;});
-  d.title={
-    content:titleText,
-    length:titleText?titleText.length:0,
-    kwPresent:kwRe&&titleText?(kwRe.lastIndex=0,kwRe.test(titleText)):null
-  };
+  d.title={content:titleText,length:titleText?titleText.length:0,kwPresent:kwRe&&titleText?(kwRe.lastIndex=0,kwRe.test(titleText)):null};
 
   /* 2. META DESCRIPTION */
-  var descEl=safe(function(){
-    return doc.querySelector('meta[name="description"]')||
-           doc.querySelector('meta[name="Description"]');
-  });
+  var descEl=safe(function(){return doc.querySelector('meta[name="description"]')||doc.querySelector('meta[name="Description"]');});
   var descText=descEl?(descEl.getAttribute('content')||'').trim():null;
-  d.metaDescription={
-    content:descText||null,
-    length:descText?descText.length:0,
-    kwPresent:kwRe&&descText?(kwRe.lastIndex=0,kwRe.test(descText)):null
-  };
+  d.metaDescription={content:descText||null,length:descText?descText.length:0,kwPresent:kwRe&&descText?(kwRe.lastIndex=0,kwRe.test(descText)):null};
 
   /* 3. OTHER META */
   d.metaRobots=safe(function(){var e=doc.querySelector('meta[name="robots"]');return e?(e.getAttribute('content')||'').trim():null;});
@@ -371,7 +681,7 @@ function analyze(rawHtml, pageUrl, keyword){
   d.hostname=pageHost;
   d.htmlSize=rawHtml.length;
 
-  /* 4. ALL META TAGS (full list) */
+  /* 4. ALL META TAGS */
   d.allMeta=safe(function(){
     var out=[];
     var metas=doc.querySelectorAll('meta');
@@ -384,50 +694,42 @@ function analyze(rawHtml, pageUrl, keyword){
   },[]);
 
   /* 5. CONTENT */
-  d.wordCount=safe(function(){
+  var bodyText=safe(function(){
     var cl=(doc.body||doc.documentElement).cloneNode(true);
     var rem=cl.querySelectorAll('script,style,noscript,svg,canvas,nav,footer,header');
     Array.prototype.forEach.call(rem,function(e){e.parentNode&&e.parentNode.removeChild(e);});
-    var text=(cl.textContent||'').replace(/\s+/g,' ').trim();
-    return text?text.split(/\s+/).filter(function(w){return w.length>0;}).length:0;
-  },0);
+    return (cl.textContent||'').replace(/\s+/g,' ').trim();
+  },'');
+  d.wordCount=bodyText?bodyText.split(/\s+/).filter(function(w){return w.length>0;}).length:0;
+  d.readability=calcReadability(bodyText);
 
   if(kw){
     d.keywordDensity=safe(function(){
-      var cl=(doc.body||doc.documentElement).cloneNode(true);
-      var rem=cl.querySelectorAll('script,style,noscript');
-      Array.prototype.forEach.call(rem,function(e){e.parentNode&&e.parentNode.removeChild(e);});
-      var text=(cl.textContent||'').replace(/\s+/g,' ').trim();
       var re=new RegExp(escRe(kw),'gi');
-      var matches=text.match(re)||[];
-      var words=text.split(/\s+/).filter(function(w){return w.length>0;}).length;
-      // Find keyword-in-context snippets
+      var matches=bodyText.match(re)||[];
+      var words=bodyText.split(/\s+/).filter(function(w){return w.length>0;}).length;
       var snippets=[];
       var re2=new RegExp('(?:[\\w,\\.\\s]{0,40})('+escRe(kw)+')(?:[\\w,\\.\\s]{0,40})','gi');
       var m; var limit=5;
-      while((m=re2.exec(text))!==null&&snippets.length<limit){
-        snippets.push(m[0].trim());
-      }
-      return {count:matches.length,density:words>0?((matches.length/words)*100).toFixed(2):'0.00',snippets:snippets};
+      while((m=re2.exec(bodyText))!==null&&snippets.length<limit){snippets.push(m[0].trim());}
+      return{count:matches.length,density:words>0?((matches.length/words)*100).toFixed(2):'0.00',snippets:snippets};
     });
   }
 
-  /* 6. HEADINGS — all actual text */
+  /* 6. HEADINGS */
   d.headings={};d.headingCounts={};
   for(var hi=1;hi<=6;hi++){
     var lv='h'+hi;
     d.headings[lv]=safe(function(l){
-      return Array.prototype.slice.call(doc.querySelectorAll(l)).map(function(el){
-        return el.textContent.trim().replace(/\s+/g,' ');
-      });
+      return Array.prototype.slice.call(doc.querySelectorAll(l)).map(function(el){return el.textContent.trim().replace(/\s+/g,' ');});
     }.bind(null,lv),[]);
     d.headingCounts[lv]=d.headings[lv].length;
   }
 
-  /* 7. IMAGES — every image with src + alt */
+  /* 7. IMAGES */
   d.images=safe(function(){
     var imgs=Array.prototype.slice.call(doc.querySelectorAll('img'));
-    var missing=0,empty=0,kwInAlt=0;
+    var missing=0,empty=0,kwInAlt=0,noLazy=0,noWidthHeight=0;
     var list=imgs.map(function(img){
       var src=img.getAttribute('src')||'';
       var alt=img.getAttribute('alt');
@@ -436,16 +738,18 @@ function analyze(rawHtml, pageUrl, keyword){
       var hasEmpty=(alt!==null&&alt.trim()==='');
       if(hasMissing)missing++;
       if(hasEmpty)empty++;
-      if(kwRe&&alt&&(kwRe.lastIndex=0,kwRe.test(alt)))kwInAlt++;
+      var loading=img.getAttribute('loading')||'';
+      if(loading!=='lazy')noLazy++;
       var w=img.getAttribute('width')||'';
       var h=img.getAttribute('height')||'';
-      var loading=img.getAttribute('loading')||'';
-      return {src:resolved,originalSrc:src,alt:alt,hasMissing:hasMissing,hasEmpty:hasEmpty,width:w,height:h,loading:loading};
+      if(!w||!h)noWidthHeight++;
+      if(kwRe&&alt&&(kwRe.lastIndex=0,kwRe.test(alt)))kwInAlt++;
+      return{src:resolved,originalSrc:src,alt:alt,hasMissing:hasMissing,hasEmpty:hasEmpty,width:w,height:h,loading:loading};
     });
-    return {total:imgs.length,missingAlt:missing,emptyAlt:empty,kwInAlt:kwRe?kwInAlt:null,list:list};
-  },{total:0,missingAlt:0,emptyAlt:0,kwInAlt:null,list:[]});
+    return{total:imgs.length,missingAlt:missing,emptyAlt:empty,kwInAlt:kwRe?kwInAlt:null,noLazy:noLazy,noWidthHeight:noWidthHeight,list:list};
+  },{total:0,missingAlt:0,emptyAlt:0,kwInAlt:null,noLazy:0,noWidthHeight:0,list:[]});
 
-  /* 8. LINKS — every link with url + text + type */
+  /* 8. LINKS */
   d.links=safe(function(){
     var internal=0,external=0,nofollow=0;
     var internalList=[],externalList=[];
@@ -463,66 +767,31 @@ function analyze(rawHtml, pageUrl, keyword){
       if(isInternal){internal++;if(internalList.length<30)internalList.push({href:resolved,text:text,nofollow:isNofollow});}
       else{external++;if(externalList.length<30)externalList.push({href:resolved,text:text,nofollow:isNofollow});}
     });
-    return {total:anchors.length,internal:internal,external:external,nofollow:nofollow,internalList:internalList,externalList:externalList};
+    return{total:anchors.length,internal:internal,external:external,nofollow:nofollow,internalList:internalList,externalList:externalList};
   },{total:0,internal:0,external:0,nofollow:0,internalList:[],externalList:[]});
 
-  /* 9. STRUCTURED DATA — full JSON-LD content */
+  /* 9. STRUCTURED DATA */
   d.structuredData=safe(function(){
     var scripts=Array.prototype.slice.call(doc.querySelectorAll('script[type="application/ld+json"]'));
     var items=scripts.map(function(s,i){
-      try{
-        var obj=JSON.parse(s.textContent||'');
-        return {index:i+1,type:obj['@type']||(Array.isArray(obj)?'Array':'Unknown'),raw:JSON.stringify(obj,null,2)};
-      }catch(e){return {index:i+1,type:'Parse error',raw:s.textContent||''};}
+      try{var obj=JSON.parse(s.textContent||'');return{index:i+1,type:obj['@type']||(Array.isArray(obj)?'Array':'Unknown'),raw:JSON.stringify(obj,null,2)};}
+      catch(e){return{index:i+1,type:'Parse error',raw:s.textContent||''};}
     });
-    return {jsonLd:scripts.length,items:items,microdata:doc.querySelectorAll('[itemscope]').length};
+    return{jsonLd:scripts.length,items:items,microdata:doc.querySelectorAll('[itemscope]').length};
   },{jsonLd:0,items:[],microdata:0});
 
   /* 10. SOCIAL META */
-  function getMeta(sel){
-    return safe(function(){var e=doc.querySelector(sel);return e?(e.getAttribute('content')||'').trim()||null:null;});
-  }
-  d.openGraph={
-    title:getMeta('meta[property="og:title"]'),
-    description:getMeta('meta[property="og:description"]'),
-    image:getMeta('meta[property="og:image"]'),
-    url:getMeta('meta[property="og:url"]'),
-    type:getMeta('meta[property="og:type"]'),
-    siteName:getMeta('meta[property="og:site_name"]'),
-    locale:getMeta('meta[property="og:locale"]')
-  };
-  d.twitter={
-    card:getMeta('meta[name="twitter:card"]')||getMeta('meta[property="twitter:card"]'),
-    title:getMeta('meta[name="twitter:title"]')||getMeta('meta[property="twitter:title"]'),
-    description:getMeta('meta[name="twitter:description"]')||getMeta('meta[property="twitter:description"]'),
-    image:getMeta('meta[name="twitter:image"]')||getMeta('meta[property="twitter:image"]'),
-    site:getMeta('meta[name="twitter:site"]'),
-    creator:getMeta('meta[name="twitter:creator"]')
-  };
+  function getMeta(sel){return safe(function(){var e=doc.querySelector(sel);return e?(e.getAttribute('content')||'').trim()||null:null;});}
+  d.openGraph={title:getMeta('meta[property="og:title"]'),description:getMeta('meta[property="og:description"]'),image:getMeta('meta[property="og:image"]'),url:getMeta('meta[property="og:url"]'),type:getMeta('meta[property="og:type"]'),siteName:getMeta('meta[property="og:site_name"]'),locale:getMeta('meta[property="og:locale"]')};
+  d.twitter={card:getMeta('meta[name="twitter:card"]')||getMeta('meta[property="twitter:card"]'),title:getMeta('meta[name="twitter:title"]')||getMeta('meta[property="twitter:title"]'),description:getMeta('meta[name="twitter:description"]')||getMeta('meta[property="twitter:description"]'),image:getMeta('meta[name="twitter:image"]')||getMeta('meta[property="twitter:image"]'),site:getMeta('meta[name="twitter:site"]'),creator:getMeta('meta[name="twitter:creator"]')};
 
-  /* 11. CSS/JS FILES — actual URLs */
-  d.cssFiles=safe(function(){
-    return Array.prototype.slice.call(doc.querySelectorAll('link[rel="stylesheet"][href]')).map(function(el){
-      return resolveUrl(el.getAttribute('href'),pageUrl)||el.getAttribute('href');
-    });
-  },[]);
-  d.jsFiles=safe(function(){
-    return Array.prototype.slice.call(doc.querySelectorAll('script[src]')).map(function(el){
-      return resolveUrl(el.getAttribute('src'),pageUrl)||el.getAttribute('src');
-    });
-  },[]);
+  /* 11. CSS/JS FILES */
+  d.cssFiles=safe(function(){return Array.prototype.slice.call(doc.querySelectorAll('link[rel="stylesheet"][href]')).map(function(el){return resolveUrl(el.getAttribute('href'),pageUrl)||el.getAttribute('href');});;},[]);
+  d.jsFiles=safe(function(){return Array.prototype.slice.call(doc.querySelectorAll('script[src]')).map(function(el){return resolveUrl(el.getAttribute('src'),pageUrl)||el.getAttribute('src');});;},[]);
   d.inlineStyles=safe(function(){return doc.querySelectorAll('style').length;},0);
   d.inlineScripts=safe(function(){return doc.querySelectorAll('script:not([src])').length;},0);
-  d.preloadLinks=safe(function(){
-    return Array.prototype.slice.call(doc.querySelectorAll('link[rel="preload"]')).map(function(el){
-      return {href:el.getAttribute('href')||'',as:el.getAttribute('as')||''};
-    });
-  },[]);
-  d.dnsPrefetch=safe(function(){
-    return Array.prototype.slice.call(doc.querySelectorAll('link[rel="dns-prefetch"]')).map(function(el){
-      return el.getAttribute('href')||'';
-    });
-  },[]);
+  d.preloadLinks=safe(function(){return Array.prototype.slice.call(doc.querySelectorAll('link[rel="preload"]')).map(function(el){return{href:el.getAttribute('href')||'',as:el.getAttribute('as')||''};});;},[]);
+  d.dnsPrefetch=safe(function(){return Array.prototype.slice.call(doc.querySelectorAll('link[rel="dns-prefetch"]')).map(function(el){return el.getAttribute('href')||'';});;},[]);
 
   /* 12. MIXED CONTENT */
   d.mixedContent=safe(function(){
@@ -536,17 +805,16 @@ function analyze(rawHtml, pageUrl, keyword){
   },[]);
 
   /* 13. HREFLANG */
-  d.hreflang=safe(function(){
-    return Array.prototype.slice.call(doc.querySelectorAll('link[rel="alternate"][hreflang]')).map(function(el){
-      return {lang:el.getAttribute('hreflang'),href:el.getAttribute('href')};
-    });
-  },[]);
+  d.hreflang=safe(function(){return Array.prototype.slice.call(doc.querySelectorAll('link[rel="alternate"][hreflang]')).map(function(el){return{lang:el.getAttribute('hreflang'),href:el.getAttribute('href')};});;},[]);
+
+  /* 14. SECURITY ANALYSIS */
+  d.security=analyzeSecurityFromHtml(doc, pageUrl, rawHtml);
 
   return d;
 }
 
 /* ============================================================
-   SCORE
+   SEO SCORE
 ============================================================ */
 function calcScore(d){
   var s=100,notes=[];
@@ -570,9 +838,34 @@ function calcScore(d){
   if(d.mixedContent.length>0)cut(6,'Mixed content');
   if(d.wordCount<300)cut(5,'Low word count');
   if(d.protocol!=='https:')cut(8,'Not HTTPS');
-  return {score:Math.max(s,0),notes:notes};
+  return{score:Math.max(s,0),notes:notes};
 }
 
+/* ============================================================
+   SECURITY SCORE
+============================================================ */
+function calcSecurityScore(sec){
+  var s=100,issues=[];
+  function cut(n,r){s-=n;issues.push({sev:n>=15?'critical':n>=8?'warning':'info',msg:r,pts:n});}
+  if(!sec.isHttps)cut(25,'Not using HTTPS');
+  if(!sec.cspMeta)cut(15,'No Content-Security-Policy');
+  if(!sec.xFrameMeta)cut(10,'No X-Frame-Options');
+  if(!sec.referrerMeta)cut(8,'No Referrer-Policy');
+  if(!sec.hasHsts)cut(10,'No HSTS header (meta)');
+  if(sec.mixedContentCount>0)cut(12,'Mixed HTTP content on HTTPS');
+  if(sec.inlineEventHandlers&&sec.inlineEventHandlers.count>5)cut(8,'Many inline event handlers (XSS risk)');
+  if(sec.dangerousJs&&sec.dangerousJs.count>0)cut(12,'Dangerous JS patterns (eval/innerHTML)');
+  if(sec.forms&&sec.forms.insecure>0)cut(15,'Form posts to HTTP URL');
+  if(sec.iframes&&sec.iframes.unsandboxed>0)cut(8,'Unsandboxed iframes');
+  if(sec.thirdPartyScripts&&sec.thirdPartyScripts.missingIntegrity>0)cut(7,'3rd-party scripts without SRI');
+  if(sec.generatorLeaking)cut(3,'Generator tag leaks CMS version');
+  if(sec.sensitivePatterns&&sec.sensitivePatterns.length>0)cut(20,'Sensitive data patterns in HTML');
+  return{score:Math.max(s,0),issues:issues};
+}
+
+/* ============================================================
+   ISSUES LIST
+============================================================ */
 function getIssues(d){
   var o=[];
   function add(t,tx){o.push({t:t,tx:tx});}
@@ -604,46 +897,125 @@ function getIssues(d){
 }
 
 /* ============================================================
-   RENDER — shows actual content everywhere
+   GENERATE RECOMMENDATIONS
 ============================================================ */
-function render(d, pageUrl, keyword, proxy){
+function generateRecommendations(d){
+  var recs=[];
+  function rec(level,title,body,code){recs.push({level:level,title:title,body:body,code:code||null});}
+
+  // SEO Recommendations
+  if(!d.title.content)rec('critical','Add a Title Tag','Every page needs a unique, descriptive title tag between 30–60 characters.',
+    '<title>Your Page Title Here (30–60 chars)</title>');
+  else if(d.title.length<30)rec('warning','Title Too Short','Your title is '+d.title.length+' chars. Aim for 30–60 characters to maximize SERP display.',null);
+  else if(d.title.length>60)rec('warning','Title Too Long','Your title is '+d.title.length+' chars. Google truncates beyond ~60 chars in SERPs.',null);
+
+  if(!d.metaDescription.content)rec('critical','Add a Meta Description','Meta descriptions improve CTR in search results. Target 120–160 characters.',
+    '<meta name="description" content="Your compelling page description here. Aim for 120–160 characters.">');
+  else if(d.metaDescription.length>160)rec('warning','Meta Description Too Long','Truncated in SERPs beyond 160 chars. Current: '+d.metaDescription.length+' chars.',null);
+
+  if(!d.canonical)rec('warning','Add a Canonical URL','Prevents duplicate content issues and tells search engines the preferred URL.',
+    '<link rel="canonical" href="https://yourdomain.com/your-page/">');
+
+  if(d.headingCounts.h1===0)rec('critical','Add an H1 Heading','Every page should have exactly one H1 that summarizes the page topic.',
+    '<h1>Your Primary Keyword-Rich Heading</h1>');
+  else if(d.headingCounts.h1>1)rec('warning','Multiple H1 Tags Found','Use only one H1 per page. Demote additional H1s to H2 or H3.',null);
+
+  if(!d.openGraph.title||!d.openGraph.description||!d.openGraph.image)rec('warning','Complete Open Graph Tags','OG tags control how your page appears when shared on Facebook, LinkedIn, etc.',
+    '<meta property="og:title" content="Page Title">\n<meta property="og:description" content="Page description">\n<meta property="og:image" content="https://yoursite.com/image.jpg">\n<meta property="og:url" content="https://yoursite.com/page">');
+
+  if(!d.twitter.card)rec('info','Add Twitter Card Tags','Enhances appearance when shared on Twitter/X.',
+    '<meta name="twitter:card" content="summary_large_image">\n<meta name="twitter:title" content="Page Title">\n<meta name="twitter:description" content="Description">\n<meta name="twitter:image" content="https://yoursite.com/image.jpg">');
+
+  if(d.images.missingAlt>0)rec('critical','Fix Missing Image Alt Attributes',d.images.missingAlt+' image(s) missing alt text. Alt text is critical for accessibility and image SEO.',
+    '<!-- Add descriptive alt text to every image -->\n<img src="photo.jpg" alt="Descriptive text about the image">');
+
+  if(d.structuredData.jsonLd===0&&d.structuredData.microdata===0)rec('warning','Add Structured Data (Schema.org)','JSON-LD structured data enables rich results in Google Search (stars, FAQs, breadcrumbs).',
+    '<scr'+'ipt type="application/ld+json">\n{\n  "@context": "https://schema.org",\n  "@type": "WebPage",\n  "name": "Page Title",\n  "description": "Page description"\n}\n</'+'script>');
+
+  if(d.wordCount<300)rec('warning','Increase Content Length','Pages under 300 words are typically considered thin content by search engines. Aim for 600–1500+ words for most topics.',null);
+
+  if(!d.lang)rec('info','Add Language Attribute','Helps search engines and screen readers understand the page language.',
+    '<html lang="en">');
+
+  // Security Recommendations
+  var sec=d.security;
+  if(!sec.isHttps)rec('critical','Migrate to HTTPS','HTTP sites are flagged as "Not Secure" in Chrome and penalized in Google rankings. Get an SSL certificate (free via Let\'s Encrypt).',
+    '# Install Certbot (Ubuntu/Debian)\nsudo apt install certbot python3-certbot-nginx\nsudo certbot --nginx -d yourdomain.com');
+
+  if(!sec.cspMeta)rec('critical','Implement Content-Security-Policy','CSP prevents XSS attacks by restricting which resources can load. Start with a Report-Only policy.',
+    '<!-- In <head> -->\n<meta http-equiv="Content-Security-Policy"\n  content="default-src \'self\'; script-src \'self\' https://trusted-cdn.com; style-src \'self\' \'unsafe-inline\'; img-src \'self\' data: https:;">\n\n<!-- Or better: set as HTTP header in your server config -->\nContent-Security-Policy: default-src \'self\'');
+
+  if(!sec.xFrameMeta)rec('critical','Add X-Frame-Options Header','Prevents your page from being embedded in iframes on other sites (Clickjacking protection).',
+    '<!-- Meta tag fallback (HTTP header is preferred) -->\n<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">\n\n<!-- Nginx -->\nadd_header X-Frame-Options "SAMEORIGIN" always;\n\n<!-- Apache -->\nHeader always set X-Frame-Options "SAMEORIGIN"');
+
+  if(!sec.referrerMeta)rec('warning','Set a Referrer-Policy','Controls how much referrer info is sent with requests, improving privacy.',
+    '<meta name="referrer" content="strict-origin-when-cross-origin">\n\n<!-- Or as HTTP header -->\nReferrer-Policy: strict-origin-when-cross-origin');
+
+  if(sec.dangerousJs&&sec.dangerousJs.count>0)rec('critical','Remove Dangerous JS Patterns','Found: '+sec.dangerousJs.issues.join(', ')+'. These are common XSS vectors. Use safer alternatives.',
+    '// Instead of eval():\n// BAD:  eval(userInput)\n// GOOD: JSON.parse(sanitizedInput)\n\n// Instead of innerHTML:\n// BAD:  el.innerHTML = userContent\n// GOOD: el.textContent = userContent\n//       or use DOMPurify.sanitize(userContent)');
+
+  if(sec.thirdPartyScripts&&sec.thirdPartyScripts.missingIntegrity>0)rec('warning','Add Subresource Integrity (SRI) to External Scripts',sec.thirdPartyScripts.missingIntegrity+' external script(s) load without integrity checks. SRI prevents supply-chain attacks.',
+    '<!-- Generate hash: https://www.srihash.org/ -->\n<scr'+'ipt src="https://cdn.example.com/lib.js"\n  integrity="sha384-[hash]"\n  crossorigin="anonymous"></'+'script>');
+
+  if(sec.iframes&&sec.iframes.unsandboxed>0)rec('warning','Sandbox Your iFrames',sec.iframes.unsandboxed+' iframe(s) lack sandbox attribute, allowing embedded content full privileges.',
+    '<iframe src="https://example.com"\n  sandbox="allow-scripts allow-same-origin"\n  loading="lazy"></iframe>');
+
+  if(sec.sensitivePatterns&&sec.sensitivePatterns.length>0)rec('critical','Sensitive Data Detected in HTML','Potential sensitive data found in page source. Review and remove immediately: '+sec.sensitivePatterns.map(function(p){return p.name;}).join(', ')+'.',null);
+
+  if(sec.generatorLeaking)rec('info','Hide CMS Generator Tag','Your site is advertising it runs on: "'+sec.generatorLeaking+'". Attackers use this to target known vulnerabilities.',
+    '<!-- Remove this from your <head>: -->\n<!-- <meta name="generator" content="WordPress 6.x"> -->\n\n// WordPress: add to functions.php\nremove_action(\'wp_head\', \'wp_generator\');');
+
+  // Performance-adjacent SEO
+  if(d.images.noLazy>3)rec('info','Add Lazy Loading to Images',d.images.noLazy+' image(s) load eagerly. Lazy loading improves page speed and Core Web Vitals.',
+    '<img src="large-image.jpg" alt="Description" loading="lazy">');
+
+  if(!d.favicon)rec('info','Add a Favicon','Favicons appear in browser tabs and bookmarks, improving brand recognition.',
+    '<link rel="icon" href="/favicon.ico" type="image/x-icon">\n<link rel="apple-touch-icon" href="/apple-touch-icon.png">');
+
+  if((d.htmlSize/1024)>200)rec('info','Reduce HTML Page Size','Your HTML is '+(d.htmlSize/1024).toFixed(0)+' KB. Large HTML can slow TTFB. Consider removing unused code, minifying, and enabling gzip compression.',null);
+
+  // Sort: critical first, then warnings, then info
+  var order={critical:0,warning:1,info:2,pass:3};
+  recs.sort(function(a,b){return order[a.level]-order[b.level];});
+  return recs;
+}
+
+/* ============================================================
+   RENDER
+============================================================ */
+function render(d, pageUrl, keyword, proxy, secApiData, ipData){
   var sc=calcScore(d);
+  var secSc=calcSecurityScore(d.security);
   var iss=getIssues(d);
+  var recs=generateRecommendations(d);
   var scCol=sc.score>=80?'var(--grn)':sc.score>=55?'var(--ylw)':'var(--red)';
+  var secCol=secSc.score>=80?'var(--grn)':secSc.score>=50?'var(--ylw)':'var(--red)';
 
   function B(cls,txt){return '<span class="badge b-'+cls+'">'+escH(txt)+'</span>';}
   function kwB(present){return present===null||present===undefined?'':present?B('g','KW \u2713'):B('y','KW \u2717');}
 
-  /* ---- CHAR BAR ---- */
   function charBar(len,min,max){
     var pct=Math.min((len/Math.max(max*1.5,1))*100,100);
     var col=len>=min&&len<=max?'var(--grn)':(len===0?'var(--red)':'var(--ylw)');
     return '<div class="char-bar"><div class="char-fill" style="width:'+pct+'%;background:'+col+'"></div></div>';
   }
 
-  /* ---- HEADINGS ---- */
   function headingsHtml(){
     var all=[];
     for(var i=1;i<=6;i++){var arr=d.headings['h'+i];for(var j=0;j<arr.length;j++)all.push({lvl:i,text:arr[j]});}
     if(!all.length)return '<span class="val miss">No headings found on this page</span>';
     var show=all.slice(0,15),rest=all.slice(15);
-    function rows(arr){return arr.map(function(h){
-      return '<div class="hrow"><span class="htag h'+h.lvl+'t">H'+h.lvl+'</span><span class="htxt">'+escH(h.text)+'</span></div>';
-    }).join('');}
+    function rows(arr){return arr.map(function(h){return '<div class="hrow"><span class="htag h'+h.lvl+'t">H'+h.lvl+'</span><span class="htxt">'+escH(h.text)+'</span></div>';}).join('');}
     var html='<div>'+rows(show)+'</div>';
-    if(rest.length){
-      html+='<button class="xbtn" onclick="toggleX(\'hx\')">&#9660; '+rest.length+' more headings</button>';
-      html+='<div class="xc" id="hx">'+rows(rest)+'</div>';
-    }
+    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\'hx\')">&#9660; '+rest.length+' more headings</button><div class="xc" id="hx">'+rows(rest)+'</div>';}
     return html;
   }
 
-  /* ---- IMAGES TABLE ---- */
   function imagesHtml(){
     if(!d.images.list||!d.images.list.length)return '<span class="val miss">No images found</span>';
     var show=d.images.list.slice(0,20),rest=d.images.list.slice(20);
     function rows(arr){
-      return arr.map(function(img,idx){
+      return arr.map(function(img){
         var altDisplay,altClass;
         if(img.hasMissing){altDisplay='alt attribute MISSING';altClass='missing';}
         else if(img.hasEmpty){altDisplay='alt="" (empty)';altClass='empty';}
@@ -659,82 +1031,156 @@ function render(d, pageUrl, keyword, proxy){
       }).join('');
     }
     var html='<div class="scroll">'+rows(show)+'</div>';
-    if(rest.length){
-      html+='<button class="xbtn" onclick="toggleX(\'imgx\')">&#9660; '+rest.length+' more images</button>';
-      html+='<div class="xc" id="imgx"><div class="scroll">'+rows(rest)+'</div></div>';
-    }
+    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\'imgx\')">&#9660; '+rest.length+' more images</button><div class="xc" id="imgx"><div class="scroll">'+rows(rest)+'</div></div>';}
     return html;
   }
 
-  /* ---- LINKS TABLE ---- */
   function linksTableHtml(list,id){
     if(!list||!list.length)return '<span class="val miss">None found</span>';
     function rows(arr){
       return arr.map(function(lnk){
-        return '<tr>'+
-          '<td class="url-cell"><a href="'+escH(lnk.href)+'" target="_blank" rel="noopener">'+escH(trunc(lnk.href,70))+'</a></td>'+
+        return '<tr><td class="url-cell"><a href="'+escH(lnk.href)+'" target="_blank" rel="noopener">'+escH(trunc(lnk.href,70))+'</a></td>'+
           '<td class="text-cell">'+escH(trunc(lnk.text||'\u2014',50))+'</td>'+
-          '<td>'+(lnk.nofollow?B('y','nofollow'):'')+'</td>'+
-          '</tr>';
+          '<td>'+(lnk.nofollow?B('y','nofollow'):'')+'</td></tr>';
       }).join('');
     }
     var show=list.slice(0,15),rest=list.slice(15);
     var html='<div class="scroll"><table class="tbl"><thead><tr><th>URL</th><th>Anchor Text</th><th>Rel</th></tr></thead><tbody>'+rows(show)+'</tbody></table></div>';
-    if(rest.length){
-      html+='<button class="xbtn" onclick="toggleX(\''+id+'\')">&#9660; '+rest.length+' more links</button>';
-      html+='<div class="xc" id="'+id+'"><div class="scroll"><table class="tbl"><tbody>'+rows(rest)+'</tbody></table></div></div>';
-    }
+    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\''+id+'\')">&#9660; '+rest.length+' more links</button><div class="xc" id="'+id+'"><div class="scroll"><table class="tbl"><tbody>'+rows(rest)+'</tbody></table></div></div>';}
     return html;
   }
 
-  /* ---- CSS FILES ---- */
-  function cssHtml(){
-    if(!d.cssFiles.length)return '<span class="val miss">No external CSS found</span>';
-    return '<div class="scroll-sm"><table class="tbl"><tbody>'+
-      d.cssFiles.map(function(u,i){return '<tr><td style="color:var(--mut)">'+(i+1)+'.</td><td class="url-cell"><a href="'+escH(u)+'" target="_blank" rel="noopener">'+escH(trunc(u,90))+'</a></td></tr>';}).join('')+
-      '</tbody></table></div>';
-  }
-
-  /* ---- JS FILES ---- */
-  function jsHtml(){
-    if(!d.jsFiles.length)return '<span class="val miss">No external JS found</span>';
-    var show=d.jsFiles.slice(0,15),rest=d.jsFiles.slice(15);
-    function rows(arr){return arr.map(function(u,i){return '<tr><td style="color:var(--mut)">'+(i+1)+'.</td><td class="url-cell"><a href="'+escH(u)+'" target="_blank" rel="noopener">'+escH(trunc(u,90))+'</a></td></tr>';}).join('');}
-    var html='<div class="scroll-sm"><table class="tbl"><tbody>'+rows(show)+'</tbody></table></div>';
-    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\'jsx\')">&#9660; '+rest.length+' more</button><div class="xc" id="jsx"><table class="tbl"><tbody>'+rows(rest)+'</tbody></table></div>';}
-    return html;
-  }
-
-  /* ---- PRELOAD ---- */
-  function preloadHtml(){
-    if(!d.preloadLinks||!d.preloadLinks.length)return '<span class="val miss">No preload hints</span>';
-    return '<table class="tbl"><thead><tr><th>Resource</th><th>As</th></tr></thead><tbody>'+
-      d.preloadLinks.map(function(p){return '<tr><td class="url-cell">'+escH(trunc(p.href,70))+'</td><td>'+escH(p.as||'\u2014')+'</td></tr>';}).join('')+
-      '</tbody></table>';
-  }
-
-  /* ---- DNS PREFETCH ---- */
-  function dnsHtml(){
-    if(!d.dnsPrefetch||!d.dnsPrefetch.length)return '<span class="val miss">No dns-prefetch tags</span>';
-    return '<ul class="kv">'+d.dnsPrefetch.map(function(h){return '<li><span class="kv-v">'+escH(h)+'</span></li>';}).join('')+'</ul>';
-  }
-
-  /* ---- JSON-LD ---- */
-  function jldHtml(){
-    if(!d.structuredData.items.length)return '<span class="val miss">No JSON-LD found</span>';
-    return d.structuredData.items.map(function(item,i){
-      return '<div style="margin-bottom:12px">'+
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">'+
-          '<span style="font-family:var(--mono);font-size:10px;color:var(--mut)">#'+item.index+'</span>'+
-          B('p',item.type)+
+  function secHeadersHtml(){
+    var sec=d.security;
+    var headers=[
+      {name:'HTTPS',present:sec.isHttps,val:sec.isHttps?'Enabled':'Not enabled',note:'All traffic should use HTTPS. Affects SEO rankings.'},
+      {name:'Content-Security-Policy',present:!!sec.cspMeta,val:sec.cspMeta||null,note:'Prevents XSS. Set via meta http-equiv or HTTP header.'},
+      {name:'X-Frame-Options',present:!!sec.xFrameMeta,val:sec.xFrameMeta||null,note:'Prevents clickjacking via iframe embedding.'},
+      {name:'Referrer-Policy',present:!!sec.referrerMeta,val:sec.referrerMeta||null,note:'Controls referrer data sent to external sites.'},
+      {name:'HSTS (meta)',present:sec.hasHsts,val:sec.hasHsts?'Present':'Not found (set via HTTP header)',note:'Strict-Transport-Security enforces HTTPS connections.'}
+    ];
+    return headers.map(function(h){
+      var cls=h.present?'present':'missing';
+      var nameCls=h.present?'ok':'missing';
+      var icon=h.present?'✓':'✗';
+      return '<div class="sec-header-row '+cls+'">'+
+        '<div class="sec-h-icon" style="color:'+(h.present?'var(--grn)':'var(--red)')+'">'+icon+'</div>'+
+        '<div style="flex:1">'+
+          '<div class="sec-h-name '+nameCls+'">'+escH(h.name)+'</div>'+
+          '<div class="sec-h-val">'+(h.val?escH(trunc(h.val,120)):'<em style="color:var(--mut)">Not set</em>')+'</div>'+
+          '<div class="sec-h-note">'+escH(h.note)+'</div>'+
         '</div>'+
-        '<button class="xbtn" onclick="toggleX(\'jld'+i+'\')">&#9660; View full JSON-LD</button>'+
-        '<div class="xc" id="jld'+i+'"><pre class="json-block">'+escH(item.raw)+'</pre></div>'+
       '</div>';
     }).join('');
   }
 
-  /* ---- SOCIAL ---- */
+  function dangerousPatternsHtml(){
+    var sec=d.security;
+    var out='';
+    // Inline event handlers
+    out+='<div style="margin-bottom:14px">';
+    out+='<div class="ct" style="margin-bottom:6px">Inline Event Handlers '+(sec.inlineEventHandlers.count>5?B('r',sec.inlineEventHandlers.count+' found'):sec.inlineEventHandlers.count>0?B('y',sec.inlineEventHandlers.count+' found'):B('g','Clean \u2713'))+'</div>';
+    if(sec.inlineEventHandlers.list&&sec.inlineEventHandlers.list.length){
+      out+='<table class="tbl"><thead><tr><th>Tag</th><th>Event</th><th>Value</th></tr></thead><tbody>';
+      out+=sec.inlineEventHandlers.list.map(function(e){return '<tr><td>&lt;'+escH(e.tag)+'&gt;</td><td style="color:var(--ylw)">'+escH(e.attr)+'</td><td class="text-cell" style="color:var(--txt2)">'+escH(e.val)+'</td></tr>';}).join('');
+      out+='</tbody></table>';
+    }else{out+='<span style="color:var(--grn);font-family:var(--mono);font-size:11px">No inline event handlers detected.</span>';}
+    out+='</div>';
+
+    // Dangerous JS
+    out+='<div style="margin-bottom:14px">';
+    out+='<div class="ct" style="margin-bottom:6px">Dangerous JS Patterns '+(sec.dangerousJs.count>0?B('r',sec.dangerousJs.count+' issues'):B('g','Clean \u2713'))+'</div>';
+    if(sec.dangerousJs.issues&&sec.dangerousJs.issues.length){
+      out+='<div style="display:flex;gap:6px;flex-wrap:wrap">';
+      out+=sec.dangerousJs.issues.map(function(i){return B('r',i);}).join('');
+      out+='</div>';
+    }else{out+='<span style="color:var(--grn);font-family:var(--mono);font-size:11px">No dangerous patterns detected.</span>';}
+    out+='</div>';
+
+    // Sensitive patterns
+    out+='<div>';
+    out+='<div class="ct" style="margin-bottom:6px">Sensitive Data in HTML '+(sec.sensitivePatterns&&sec.sensitivePatterns.length?B('r',sec.sensitivePatterns.length+' pattern types'):B('g','None detected \u2713'))+'</div>';
+    if(sec.sensitivePatterns&&sec.sensitivePatterns.length){
+      out+='<table class="tbl"><thead><tr><th>Pattern Type</th><th>Count</th><th>Examples</th></tr></thead><tbody>';
+      out+=sec.sensitivePatterns.map(function(p){
+        return '<tr><td style="color:var(--red)">'+escH(p.name)+'</td><td class="num-cell">'+p.count+'</td><td class="text-cell">'+p.examples.map(function(e){return escH(trunc(e,40));}).join('<br>')+'</td></tr>';
+      }).join('');
+      out+='</tbody></table>';
+    }else{out+='<span style="color:var(--grn);font-family:var(--mono);font-size:11px">No sensitive data patterns detected.</span>';}
+    out+='</div>';
+    return out;
+  }
+
+  function sriHtml(){
+    var sec=d.security;
+    if(!sec.thirdPartyScripts||!sec.thirdPartyScripts.list||!sec.thirdPartyScripts.list.length)
+      return '<span class="val miss">No third-party scripts found</span>';
+    return '<div class="scroll"><table class="tbl"><thead><tr><th>Script Source</th><th>SRI</th></tr></thead><tbody>'+
+      sec.thirdPartyScripts.list.map(function(s){
+        return '<tr><td class="url-cell">'+escH(trunc(s.src,80))+'</td>'+
+          '<td>'+(s.hasSri?B('g','SRI \u2713'):B('r','Missing'))+'</td></tr>';
+      }).join('')+'</tbody></table></div>';
+  }
+
+  function iframeHtml(){
+    var sec=d.security;
+    if(!sec.iframes||!sec.iframes.total)return '<span class="val miss">No iframes found</span>';
+    return '<table class="tbl"><thead><tr><th>src</th><th>Sandbox</th></tr></thead><tbody>'+
+      sec.iframes.list.map(function(f){
+        return '<tr><td class="url-cell">'+escH(trunc(f.src,70))+'</td>'+
+          '<td>'+(f.sandboxed?B('g','sandboxed')+'<span style="color:var(--txt2);font-size:9px;margin-left:4px">'+escH(f.sandbox||'')+'</span>':B('r','NO SANDBOX'))+'</td></tr>';
+      }).join('')+'</tbody></table>';
+  }
+
+  function htmlCommentsHtml(){
+    var sec=d.security;
+    if(!sec.htmlComments||!sec.htmlComments.count)return '<span style="color:var(--grn);font-family:var(--mono);font-size:11px">No HTML comments found</span>';
+    return '<div class="scroll-sm"><table class="tbl"><thead><tr><th>#</th><th>Comment Content</th></tr></thead><tbody>'+
+      sec.htmlComments.list.map(function(c,i){return '<tr><td>'+(i+1)+'</td><td class="text-cell">'+escH(c)+'</td></tr>';}).join('')+
+      '</tbody></table></div>';
+  }
+
+  function readabilityHtml(){
+    if(!d.readability)return '<span class="val miss">Not enough content to measure</span>';
+    var r=d.readability;
+    var col=r.score>=70?'var(--grn)':r.score>=50?'var(--ylw)':'var(--red)';
+    return '<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">'+
+      '<div style="text-align:center">'+
+        '<div class="rdbl-score" style="color:'+col+'">'+r.score+'</div>'+
+        '<div style="font-family:var(--mono);font-size:10px;color:var(--mut)">Flesch Score</div>'+
+        '<div style="margin-top:6px">'+B(r.score>=70?'g':r.score>=50?'y':'r',r.grade)+'</div>'+
+      '</div>'+
+      '<ul class="kv" style="flex:1;min-width:160px">'+
+        '<li><span class="kv-k">Words</span><span class="kv-v">'+r.words.toLocaleString()+'</span></li>'+
+        '<li><span class="kv-k">Sentences</span><span class="kv-v">'+r.sentences+'</span></li>'+
+        '<li><span class="kv-k">Avg sentence</span><span class="kv-v '+(r.avgSentLen>25?'warn':'ok')+'">'+r.avgSentLen+' words</span></li>'+
+        '<li><span class="kv-k">Syllables</span><span class="kv-v">'+r.syllables.toLocaleString()+'</span></li>'+
+      '</ul>'+
+    '</div>'+
+    '<div class="meter" style="margin-top:14px"><div class="meter-fill" style="width:'+r.score+'%;background:'+col+'"></div></div>'+
+    '<div style="font-family:var(--mono);font-size:9px;color:var(--mut);margin-top:6px">Flesch Reading Ease: 90–100 Very Easy, 60–70 Standard, below 30 Academic</div>';
+  }
+
+  function recsHtml(){
+    if(!recs.length)return '<span class="val miss">No recommendations — great job!</span>';
+    return recs.map(function(r){
+      return '<div class="rec-item '+r.level+'">'+'<div class="rec-title">'+escH(r.title)+'</div>'+
+        '<div class="rec-body">'+escH(r.body)+'</div>'+
+        (r.code?'<pre class="rec-code">'+escH(r.code)+'</pre>':'')+
+      '</div>';
+    }).join('');
+  }
+
+  function ipInfoHtml(){
+    if(!ipData)return '<span class="val miss">IP info unavailable — try again or check network</span>';
+    return '<ul class="kv">'+
+      '<li><span class="kv-k">IP Address</span><span class="kv-v">'+escH(ipData.ip||'—')+'</span></li>'+
+      '<li><span class="kv-k">Organization</span><span class="kv-v">'+escH(ipData.org||'—')+'</span></li>'+
+      '<li><span class="kv-k">Location</span><span class="kv-v">'+escH([ipData.city,ipData.region,ipData.country].filter(Boolean).join(', ')||'—')+'</span></li>'+
+      '<li><span class="kv-k">Timezone</span><span class="kv-v">'+escH(ipData.timezone||'—')+'</span></li>'+
+    '</ul>';
+  }
+
   function socialHtml(){
     var rows=[
       ['og:title',d.openGraph.title],['og:description',d.openGraph.description],
@@ -748,24 +1194,48 @@ function render(d, pageUrl, keyword, proxy){
     return '<table class="tbl"><thead><tr><th>Property</th><th>Value</th></tr></thead><tbody>'+
       rows.map(function(r){
         return '<tr><td style="color:var(--mut);white-space:nowrap">'+escH(r[0])+'</td>'+
-          '<td class="'+(r[1]?'':'miss-cell')+'" style="word-break:break-word">'+
-          (r[1]?escH(r[1]):'<em>\u2014 not set \u2014</em>')+'</td></tr>';
+          '<td class="'+(r[1]?'':'miss-cell')+'" style="word-break:break-word">'+(r[1]?escH(r[1]):'<em>\u2014 not set \u2014</em>')+'</td></tr>';
       }).join('')+'</tbody></table>';
   }
 
-  /* ---- ALL META TAGS ---- */
   function allMetaHtml(){
     if(!d.allMeta||!d.allMeta.length)return '<span class="val miss">None found</span>';
     var show=d.allMeta.slice(0,20),rest=d.allMeta.slice(20);
-    function rows(arr){return arr.map(function(m){
-      return '<tr><td style="color:var(--mut);white-space:nowrap">'+escH(m.name)+'</td><td style="word-break:break-word">'+escH(m.content)+'</td></tr>';
-    }).join('');}
+    function rows(arr){return arr.map(function(m){return '<tr><td style="color:var(--mut);white-space:nowrap">'+escH(m.name)+'</td><td style="word-break:break-word">'+escH(m.content)+'</td></tr>';}).join('');}
     var html='<div class="scroll-sm"><table class="tbl"><thead><tr><th>Name / Property</th><th>Content</th></tr></thead><tbody>'+rows(show)+'</tbody></table></div>';
-    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\'metax\')">&#9660; '+rest.length+' more meta tags</button><div class="xc" id="metax"><div class="scroll-sm"><table class="tbl"><tbody>'+rows(rest)+'</tbody></table></div></div>';}
+    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\'metax\')">&#9660; '+rest.length+' more</button><div class="xc" id="metax"><div class="scroll-sm"><table class="tbl"><tbody>'+rows(rest)+'</tbody></table></div></div>';}
     return html;
   }
 
-  /* ---- HREFLANG ---- */
+  function jldHtml(){
+    if(!d.structuredData.items.length)return '<span class="val miss">No JSON-LD found</span>';
+    return d.structuredData.items.map(function(item,i){
+      return '<div style="margin-bottom:12px">'+
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px">'+
+          '<span style="font-family:var(--mono);font-size:10px;color:var(--mut)">#'+item.index+'</span>'+B('p',item.type)+
+        '</div>'+
+        '<button class="xbtn" onclick="toggleX(\'jld'+i+'\')">&#9660; View full JSON-LD</button>'+
+        '<div class="xc" id="jld'+i+'"><pre class="json-block">'+escH(item.raw)+'</pre></div>'+
+      '</div>';
+    }).join('');
+  }
+
+  function cssHtml(){
+    if(!d.cssFiles.length)return '<span class="val miss">No external CSS found</span>';
+    return '<div class="scroll-sm"><table class="tbl"><tbody>'+
+      d.cssFiles.map(function(u,i){return '<tr><td style="color:var(--mut)">'+(i+1)+'.</td><td class="url-cell"><a href="'+escH(u)+'" target="_blank" rel="noopener">'+escH(trunc(u,90))+'</a></td></tr>';}).join('')+
+      '</tbody></table></div>';
+  }
+
+  function jsHtml(){
+    if(!d.jsFiles.length)return '<span class="val miss">No external JS found</span>';
+    var show=d.jsFiles.slice(0,15),rest=d.jsFiles.slice(15);
+    function rows(arr){return arr.map(function(u,i){return '<tr><td style="color:var(--mut)">'+(i+1)+'.</td><td class="url-cell"><a href="'+escH(u)+'" target="_blank" rel="noopener">'+escH(trunc(u,90))+'</a></td></tr>';}).join('');}
+    var html='<div class="scroll-sm"><table class="tbl"><tbody>'+rows(show)+'</tbody></table></div>';
+    if(rest.length){html+='<button class="xbtn" onclick="toggleX(\'jsx\')">&#9660; '+rest.length+' more</button><div class="xc" id="jsx"><table class="tbl"><tbody>'+rows(rest)+'</tbody></table></div>';}
+    return html;
+  }
+
   function hreflangHtml(){
     if(!d.hreflang||!d.hreflang.length)return '<span class="val miss">No hreflang tags found</span>';
     return '<table class="tbl"><thead><tr><th>Language</th><th>URL</th></tr></thead><tbody>'+
@@ -773,7 +1243,6 @@ function render(d, pageUrl, keyword, proxy){
       '</tbody></table>';
   }
 
-  /* ---- MIXED CONTENT ---- */
   function mixedHtml(){
     if(!d.mixedContent.length)return B('g','None found \u2713');
     return '<table class="tbl"><thead><tr><th>Tag</th><th>HTTP Resource</th></tr></thead><tbody>'+
@@ -781,7 +1250,6 @@ function render(d, pageUrl, keyword, proxy){
       '</tbody></table>';
   }
 
-  /* ---- KEYWORD SNIPPETS ---- */
   function kwSnippetHtml(){
     if(!d.keywordDensity)return '<span class="val miss">No keyword provided</span>';
     var den=parseFloat(d.keywordDensity.density);
@@ -804,8 +1272,201 @@ function render(d, pageUrl, keyword, proxy){
     return html;
   }
 
-  var htmlSizeKb=(d.htmlSize/1024).toFixed(1);
+  /* ---- NEXT STEPS HTML ---- */
+  function nextStepsHtml(){
+    var sec=d.security;
+    // Build dynamic SEO roadmap based on actual findings
+    var seoNow=[], seoSoon=[], seoLater=[], seoOngoing=[];
+
+    if(!d.title.content) seoNow.push({t:'Add a title tag — this is the single highest-impact SEO action missing',urgent:true});
+    else if(d.title.length<30||d.title.length>60) seoNow.push({t:'Resize your title tag to 30–60 characters (currently '+d.title.length+'ch)'});
+    if(!d.metaDescription.content) seoNow.push({t:'Write a compelling meta description (120–160 chars) to boost click-through rate',urgent:true});
+    if(d.headingCounts.h1===0) seoNow.push({t:'Add a single H1 heading that clearly states the page topic',urgent:true});
+    else if(d.headingCounts.h1>1) seoNow.push({t:'Remove extra H1 tags — keep exactly one per page (found '+d.headingCounts.h1+')'});
+    if(!d.viewport) seoNow.push({t:'Add a viewport meta tag — pages without one are penalized on mobile',urgent:true});
+    if(d.images.missingAlt>0) seoNow.push({t:'Add alt text to '+d.images.missingAlt+' image(s) — required for image search and accessibility',urgent:true});
+    if(d.protocol!=='https:') seoNow.push({t:'Migrate to HTTPS — Google confirms HTTPS as a ranking signal',urgent:true});
+    if(!d.canonical) seoSoon.push({t:'Add a canonical URL tag to prevent duplicate content penalties'});
+    if(!d.lang) seoSoon.push({t:'Set the HTML lang attribute so search engines understand your audience'});
+    if(!d.openGraph.title||!d.openGraph.image) seoSoon.push({t:'Complete Open Graph tags to control how your page looks when shared on social'});
+    if(!d.twitter.card) seoSoon.push({t:'Add Twitter/X card meta tags to unlock rich link previews'});
+    if(d.structuredData.jsonLd===0) seoSoon.push({t:'Implement JSON-LD structured data to qualify for rich results in Google'});
+    if(d.wordCount<600) seoSoon.push({t:'Expand content to at least 600 words — thin pages rarely rank on page 1'});
+    if(!d.favicon) seoSoon.push({t:'Add a favicon — small trust signal that improves brand recognition in SERPs'});
+    if(d.images.noLazy>3) seoLater.push({t:'Add loading="lazy" to '+d.images.noLazy+' images to improve Core Web Vitals'});
+    if(d.images.noWidthHeight>3) seoLater.push({t:'Set explicit width and height on images to eliminate Cumulative Layout Shift (CLS)'});
+    if((d.htmlSize/1024)>200) seoLater.push({t:'Reduce page HTML size from '+(d.htmlSize/1024).toFixed(0)+' KB — enable gzip and remove unused code'});
+    if(!d.hreflang||d.hreflang.length===0) seoLater.push({t:'Consider hreflang tags if you target multiple languages or regions'});
+    seoOngoing.push({t:'Monitor keyword rankings weekly and refresh title/description if CTR drops'});
+    seoOngoing.push({t:'Audit internal links quarterly to distribute page authority across the site'});
+    seoOngoing.push({t:'Update content regularly — Google favors fresh, accurate pages'});
+    seoOngoing.push({t:'Track Core Web Vitals (LCP, FID, CLS) monthly with a performance tool'});
+    if(d.readability&&d.readability.score<50) seoOngoing.push({t:'Improve readability: shorten sentences (aim under 20 words), use subheadings every 200–300 words'});
+
+    // Build dynamic Security roadmap
+    var secNow=[], secSoon=[], secLater=[], secOngoing=[];
+    if(!sec.isHttps) secNow.push({t:'Install an SSL/TLS certificate immediately — your site transmits data in plaintext',urgent:true});
+    if(!sec.cspMeta) secNow.push({t:'Deploy a Content-Security-Policy — it is your primary XSS defence layer',urgent:true});
+    if(sec.dangerousJs&&sec.dangerousJs.count>0) secNow.push({t:'Remove '+sec.dangerousJs.issues.join(', ')+' from inline scripts — these are active XSS vectors',urgent:true});
+    if(sec.sensitivePatterns&&sec.sensitivePatterns.length>0) secNow.push({t:'Remove sensitive data from HTML immediately: '+sec.sensitivePatterns.map(function(p){return p.name;}).join(', '),urgent:true});
+    if(sec.forms&&sec.forms.insecure>0) secNow.push({t:'Fix form action URLs — '+sec.forms.insecure+' form(s) send data over unencrypted HTTP',urgent:true});
+    if(!sec.xFrameMeta) secSoon.push({t:'Add X-Frame-Options SAMEORIGIN to your server config to prevent clickjacking'});
+    if(!sec.referrerMeta) secSoon.push({t:'Set a Referrer-Policy to limit what URL data leaks to third-party sites'});
+    if(sec.iframes&&sec.iframes.unsandboxed>0) secSoon.push({t:'Sandbox '+sec.iframes.unsandboxed+' iframe(s) to restrict embedded content privileges'});
+    if(sec.thirdPartyScripts&&sec.thirdPartyScripts.missingIntegrity>0) secSoon.push({t:'Add Subresource Integrity hashes to '+sec.thirdPartyScripts.missingIntegrity+' external script(s)'});
+    if(!sec.hasHsts) secSoon.push({t:'Enable HSTS on your server to force HTTPS for all future visits'});
+    if(sec.generatorLeaking) secSoon.push({t:'Remove the generator meta tag — it advertises your CMS version to attackers'});
+    if(sec.htmlComments&&sec.htmlComments.count>0) secLater.push({t:'Review '+sec.htmlComments.count+' HTML comment(s) and remove any with paths, credentials, or dev notes'});
+    if(sec.inlineEventHandlers&&sec.inlineEventHandlers.count>5) secLater.push({t:'Refactor '+sec.inlineEventHandlers.count+' inline event handlers into an external JS file'});
+    secLater.push({t:'Configure X-Content-Type-Options: nosniff in your web server to prevent MIME sniffing'});
+    secLater.push({t:'Add Permissions-Policy header to restrict access to camera, microphone, geolocation'});
+    secOngoing.push({t:'Scan for new dependency vulnerabilities every time you update libraries'});
+    secOngoing.push({t:'Review and rotate any API keys or credentials on a regular schedule'});
+    secOngoing.push({t:'Re-audit security headers after any server, CDN, or CMS upgrade'});
+    secOngoing.push({t:'Test your CSP in report-only mode before enforcing to avoid breaking functionality'});
+
+    function phaseBlock(dotClass, label, title, items){
+      if(!items.length) return '';
+      return '<div class="roadmap-phase">'+
+        '<div class="rm-dot '+dotClass+'">'+label+'</div>'+
+        '<div class="rm-body">'+
+          '<div class="rm-phase-label '+dotClass+'">'+title+'</div>'+
+          '<div class="rm-items">'+
+            items.map(function(i){
+              return '<div class="rm-item'+(i.urgent?' urgent':'')+'">'+escH(i.t)+'</div>';
+            }).join('')+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }
+
+    // Build interactive security checklist
+    var allChks=[
+      {id:'chk1',pri:'now',title:'HTTPS Enabled',desc:'Your entire site uses HTTPS',done:sec.isHttps},
+      {id:'chk2',pri:'now',title:'Content-Security-Policy',desc:'CSP header or meta tag is set',done:!!sec.cspMeta},
+      {id:'chk3',pri:'now',title:'X-Frame-Options',desc:'Clickjacking protection in place',done:!!sec.xFrameMeta},
+      {id:'chk4',pri:'now',title:'No dangerous JS patterns',desc:'No eval(), document.write(), or raw innerHTML',done:!(sec.dangerousJs&&sec.dangerousJs.count>0)},
+      {id:'chk5',pri:'now',title:'No sensitive data in HTML',desc:'No exposed keys, IPs, or credentials',done:!(sec.sensitivePatterns&&sec.sensitivePatterns.length>0)},
+      {id:'chk6',pri:'soon',title:'Referrer-Policy set',desc:'Controls referrer info sent to third parties',done:!!sec.referrerMeta},
+      {id:'chk7',pri:'soon',title:'All iFrames sandboxed',desc:'Embedded content is properly restricted',done:!(sec.iframes&&sec.iframes.unsandboxed>0)},
+      {id:'chk8',pri:'soon',title:'Subresource Integrity on scripts',desc:'External scripts have integrity hashes',done:!(sec.thirdPartyScripts&&sec.thirdPartyScripts.missingIntegrity>0)},
+      {id:'chk9',pri:'soon',title:'HSTS configured',desc:'Strict-Transport-Security is active',done:sec.hasHsts},
+      {id:'chk10',pri:'soon',title:'No forms over HTTP',desc:'All form submissions use HTTPS',done:!(sec.forms&&sec.forms.insecure>0)},
+      {id:'chk11',pri:'later',title:'Generator tag removed',desc:'CMS version is not advertised',done:!sec.generatorLeaking},
+      {id:'chk12',pri:'later',title:'HTML comments reviewed',desc:'No sensitive info in page source comments',done:!(sec.htmlComments&&sec.htmlComments.count>0)},
+      {id:'chk13',pri:'later',title:'X-Content-Type-Options',desc:'MIME-sniffing protection on server',done:false},
+      {id:'chk14',pri:'later',title:'Permissions-Policy header',desc:'Browser feature access restricted',done:false}
+    ];
+
+    var seoChks=[
+      {id:'s1',pri:'now',title:'Title tag present & optimised',desc:'30–60 chars, keyword near the start',done:!!(d.title.content&&d.title.length>=30&&d.title.length<=60)},
+      {id:'s2',pri:'now',title:'Meta description written',desc:'120–160 chars with a clear call to action',done:!!(d.metaDescription.content&&d.metaDescription.length>=70&&d.metaDescription.length<=160)},
+      {id:'s3',pri:'now',title:'Single H1 heading',desc:'One H1 that matches the page topic',done:d.headingCounts.h1===1},
+      {id:'s4',pri:'now',title:'All images have alt text',desc:'Every <img> has a meaningful alt attribute',done:d.images.missingAlt===0&&d.images.total>0},
+      {id:'s5',pri:'now',title:'HTTPS protocol',desc:'Secure connection — ranking signal',done:d.protocol==='https:'},
+      {id:'s6',pri:'now',title:'Viewport meta tag',desc:'Mobile-first page rendering',done:!!d.viewport},
+      {id:'s7',pri:'soon',title:'Canonical URL declared',desc:'Prevents duplicate content issues',done:!!d.canonical},
+      {id:'s8',pri:'soon',title:'Open Graph tags complete',desc:'og:title, og:description, og:image all set',done:!!(d.openGraph.title&&d.openGraph.description&&d.openGraph.image)},
+      {id:'s9',pri:'soon',title:'Structured data present',desc:'JSON-LD schema for rich results',done:d.structuredData.jsonLd>0||d.structuredData.microdata>0},
+      {id:'s10',pri:'soon',title:'Content depth 600+ words',desc:'Enough substance for topical authority',done:d.wordCount>=600},
+      {id:'s11',pri:'later',title:'Twitter/X card tags',desc:'Rich previews when shared on X',done:!!d.twitter.card},
+      {id:'s12',pri:'later',title:'Images lazy-loaded',desc:'loading="lazy" on below-fold images',done:d.images.noLazy<=2},
+      {id:'s13',pri:'later',title:'Image dimensions specified',desc:'Width & height prevent layout shift (CLS)',done:d.images.noWidthHeight<=2},
+      {id:'s14',pri:'later',title:'Page HTML under 100 KB',desc:'Lean HTML for fast server response time',done:(d.htmlSize/1024)<=100}
+    ];
+
+    var secDone=allChks.filter(function(c){return c.done;}).length;
+    var seoDone=seoChks.filter(function(c){return c.done;}).length;
+
+    function chkList(items, prefix){
+      return '<div class="checklist">'+
+        items.map(function(c){
+          var priClass='pri-'+c.pri;
+          var priLabel=c.pri==='now'?'DO NOW':c.pri==='soon'?'SOON':'LATER';
+          return '<div class="chk-item'+(c.done?' checked':'')+'" onclick="toggleChk(this)" id="'+prefix+c.id+'">'+
+            '<div class="chk-box">'+(c.done?'\u2713':'')+'</div>'+
+            '<div class="chk-label"><strong>'+escH(c.title)+'</strong><span>'+escH(c.desc)+'</span></div>'+
+            (!c.done?'<div class="chk-pri '+priClass+'">'+priLabel+'</div>':
+             '<div class="chk-pri" style="background:rgba(0,208,132,.1);color:var(--grn);border:1px solid rgba(0,208,132,.2)">DONE</div>')+
+          '</div>';
+        }).join('')+
+      '</div>';
+    }
+
+    var out='';
+
+    // Summary rings
+    out+='<div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:28px">';
+    out+=ringCard('SEO Checklist',seoDone,seoChks.length,'var(--acc)');
+    out+=ringCard('Security Checklist',secDone,allChks.length,'var(--grn)');
+    out+=ringCard('Critical Issues',criticalRecs,criticalRecs>0?criticalRecs:1,'var(--org)',true);
+    out+='</div>';
+
+    out+='<div class="grid">';
+
+    // SEO Roadmap
+    out+='<div class="card c3"><div class="ch"><div class="ct">SEO Action Roadmap</div>'+B('b','Priority order')+'</div>'+
+      '<div class="roadmap">'+
+      phaseBlock('now','!','Fix Immediately (Quick wins that move the needle fastest)',seoNow)+
+      phaseBlock('soon','2','Fix Soon (Complete within 1–2 weeks)',seoSoon)+
+      phaseBlock('later','3','Fix Later (Improvements for next sprint)',seoLater)+
+      phaseBlock('ongoing','\u221e','Ongoing Habits (Sustain and grow your rankings)',seoOngoing)+
+      '</div></div>';
+
+    // Security Roadmap
+    out+='<div class="card c3"><div class="ch"><div class="ct">Security Action Roadmap</div>'+B('r','Priority order')+'</div>'+
+      '<div class="roadmap">'+
+      phaseBlock('now','!','Fix Immediately (Active vulnerabilities or critical gaps)',secNow)+
+      phaseBlock('soon','2','Fix Soon (Harden before next deployment)',secSoon)+
+      phaseBlock('later','3','Fix Later (Defence-in-depth improvements)',secLater)+
+      phaseBlock('ongoing','\u221e','Ongoing Habits (Security is never one-and-done)',secOngoing)+
+      '</div></div>';
+
+    // Interactive checklists
+    out+='<div class="card c2">';
+    out+='<div class="ch"><div class="ct">SEO Checklist &mdash; track your progress</div>'+
+      B('b',seoDone+'/'+seoChks.length+' done')+'</div>';
+    out+=chkList(seoChks,'seo_');
+    out+='</div>';
+
+    out+='<div class="card">';
+    out+='<div class="ch"><div class="ct">Security Hardening Checklist</div>'+
+      B('g',secDone+'/'+allChks.length+' done')+'</div>';
+    out+=chkList(allChks,'sec_');
+    out+='</div>';
+
+    out+='</div>';
+    return out;
+  }
+
+  function ringCard(label, done, total, col, invert){
+    var pct=total>0?Math.round((done/total)*100):0;
+    if(invert){pct=done;done=done;total=total;}
+    var r=28,circ=2*Math.PI*r;
+    var dash=invert?0:(circ*(done/Math.max(total,1)));
+    var scoreColor=invert?(done>0?'var(--org)':'var(--grn)'):col;
+    return '<div class="score-card" style="flex:1;min-width:160px">'+
+      '<div class="progress-ring" style="width:64px;height:64px">'+
+        '<svg width="64" height="64" viewBox="0 0 64 64">'+
+          '<circle cx="32" cy="32" r="'+r+'" fill="none" stroke="var(--bdr2)" stroke-width="4"/>'+
+          '<circle cx="32" cy="32" r="'+r+'" fill="none" stroke="'+scoreColor+'" stroke-width="4"'+
+            ' stroke-dasharray="'+(invert?0:dash.toFixed(1))+' '+circ.toFixed(1)+'"'+
+            ' stroke-linecap="round"/>'+
+        '</svg>'+
+        '<div class="progress-ring-label" style="color:'+scoreColor+';font-size:'+(invert&&done>9?'11px':'13px')+'">'+
+          (invert?done:pct+'%')+'</div>'+
+      '</div>'+
+      '<div>'+
+        '<div class="score-label">'+escH(label)+'</div>'+
+        '<div class="score-desc">'+(invert?done+' need fixing':done+' of '+total+' complete')+'</div>'+
+      '</div>'+
+    '</div>';
+  }
+
+
   var totalH=0;for(var hk in d.headingCounts)totalH+=d.headingCounts[hk];
+  var criticalRecs=recs.filter(function(r){return r.level==='critical';}).length;
+  var warningRecs=recs.filter(function(r){return r.level==='warning';}).length;
 
   /* ====== BUILD HTML ====== */
   var html=
@@ -815,7 +1476,7 @@ function render(d, pageUrl, keyword, proxy){
     '<div>'+
       '<div style="font-family:var(--mono);font-size:9px;color:var(--mut);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px">Analyzed</div>'+
       '<div class="rurl"><a href="'+escH(pageUrl)+'" target="_blank" rel="noopener noreferrer">'+escH(pageUrl)+'</a></div>'+
-      '<div class="rmeta">via: '+escH(proxy)+' &nbsp;&middot;&nbsp; '+htmlSizeKb+' KB HTML &nbsp;&middot;&nbsp; '+new Date().toLocaleTimeString()+'</div>'+
+      '<div class="rmeta">'+htmlSizeKb+' KB HTML &nbsp;&middot;&nbsp; '+new Date().toLocaleTimeString()+' &nbsp;&middot;&nbsp; Full scan complete</div>'+
     '</div>'+
     '<div class="ract">'+
       '<button class="btn btn-o" onclick="doExport()">&#11015; JSON</button>'+
@@ -823,24 +1484,57 @@ function render(d, pageUrl, keyword, proxy){
     '</div>'+
   '</div>'+
 
-  /* HEALTH BAR */
-  '<div class="hbar">'+
-    '<div style="flex-shrink:0;text-align:center">'+
-      '<div class="snum" style="color:'+scCol+'">'+sc.score+'</div>'+
-      '<div class="sbar-w"><div class="sbar" style="width:'+sc.score+'%;background:'+scCol+'"></div></div>'+
-      '<div class="slbl">SEO Score</div>'+
+  /* DUAL SCORE */
+  '<div class="score-row">'+
+    '<div class="score-card">'+
+      '<div class="score-circle" style="color:'+scCol+';border-color:'+scCol+'">'+sc.score+'</div>'+
+      '<div><div class="score-label">SEO Score</div><div class="score-desc">'+
+        (sc.score>=80?'Good \u2014 keep optimizing':sc.score>=55?'Needs work \u2014 several issues found':'Poor \u2014 critical issues present')+
+      '</div></div>'+
     '</div>'+
-    '<div class="iblock">'+
-      '<div class="ititle">Signals &amp; Issues</div>'+
-      '<div class="tags">'+iss.map(function(i){return '<span class="tag t-'+i.t+'">'+escH(i.tx)+'</span>';}).join('')+'</div>'+
+    '<div class="score-card">'+
+      '<div class="score-circle" style="color:'+secCol+';border-color:'+secCol+'">'+secSc.score+'</div>'+
+      '<div><div class="score-label">Security Score</div><div class="score-desc">'+
+        (secSc.score>=80?'Good security posture':secSc.score>=50?'Moderate — review warnings':'Poor — critical vulnerabilities')+
+      '</div></div>'+
+    '</div>'+
+    '<div class="score-card">'+
+      '<div class="score-circle" style="color:var(--org);border-color:var(--org)">'+criticalRecs+'</div>'+
+      '<div><div class="score-label">Critical Issues</div><div class="score-desc">'+warningRecs+' warnings &amp; '+criticalRecs+' critical fixes needed</div></div>'+
     '</div>'+
   '</div>'+
 
-  /* ── CORE META ── */
+  /* ISSUES */
+  '<div class="hbar">'+
+    '<div style="flex:1">'+
+      '<div class="ititle">SEO Signals</div>'+
+      '<div class="tags">'+iss.map(function(i){return '<span class="tag t-'+i.t+'">'+escH(i.tx)+'</span>';}).join('')+'</div>'+
+    '</div>'+
+    '<div style="flex:1">'+
+      '<div class="ititle">Security Signals</div>'+
+      '<div class="tags">'+secSc.issues.slice(0,10).map(function(i){
+        return '<span class="tag '+(i.sev==='critical'?'t-r':i.sev==='warning'?'t-y':'t-b')+'">'+escH(i.msg)+'</span>';
+      }).join('')+(secSc.issues.length===0?'<span class="tag t-g">No critical issues \u2713</span>':'')+
+      '</div>'+
+    '</div>'+
+  '</div>'+
+
+  /* ====== TABS ====== */
+  '<div class="tabs-nav">'+
+    '<button class="tab-btn active" onclick="switchTab(\'seo\',this)">&#128269; SEO Analysis</button>'+
+    '<button class="tab-btn" onclick="switchTab(\'security\',this)">&#128274; Security</button>'+
+    '<button class="tab-btn" onclick="switchTab(\'recs\',this)">&#9889; Recommendations '+(criticalRecs>0?'<span class="badge b-r">'+criticalRecs+' critical</span>':'')+'</button>'+
+    '<button class="tab-btn" onclick="switchTab(\'nextsteps\',this)">&#9654; Next Steps</button>'+
+    '<button class="tab-btn" onclick="switchTab(\'technical\',this)">&#9881; Technical</button>'+
+    '<button class="tab-btn" onclick="switchTab(\'social\',this)">&#128279; Social &amp; Meta</button>'+
+  '</div>'+
+
+  /* ====== SEO TAB ====== */
+  '<div class="tab-pane active" id="tab-seo">'+
+
   '<div class="sec">Core Meta Tags</div>'+
   '<div class="grid">'+
 
-    /* Title */
     '<div class="card">'+
       '<div class="ch"><div class="ct">Title Tag</div><div class="bgs">'+
         (d.title.content?(d.title.length>=30&&d.title.length<=60?B('g',d.title.length+'ch \u2713'):B('y',d.title.length+'ch')):B('r','MISSING'))+
@@ -849,101 +1543,54 @@ function render(d, pageUrl, keyword, proxy){
         (d.title.content?escH(d.title.content):'No &lt;title&gt; tag found on this page')+
       '</div>'+
       (d.title.content?charBar(d.title.length,30,60):'')+
-      '<div class="sub">'+(d.title.content?d.title.length+' characters':'')+'&nbsp;&nbsp;Ideal: 30&ndash;60 chars</div>'+
     '</div>'+
 
-    /* Meta Description */
     '<div class="card">'+
       '<div class="ch"><div class="ct">Meta Description</div><div class="bgs">'+
         (d.metaDescription.content?(d.metaDescription.length>=70&&d.metaDescription.length<=160?B('g',d.metaDescription.length+'ch \u2713'):B('y',d.metaDescription.length+'ch')):B('r','MISSING'))+
         kwB(d.metaDescription.kwPresent)+'</div></div>'+
       '<div class="content-val '+(d.metaDescription.content?'':'miss')+'">'+
-        (d.metaDescription.content?escH(d.metaDescription.content):'No meta description found &mdash; search engines may auto-generate a snippet')+
+        (d.metaDescription.content?escH(d.metaDescription.content):'No meta description found')+
       '</div>'+
       (d.metaDescription.content?charBar(d.metaDescription.length,70,160):'')+
-      '<div class="sub">'+(d.metaDescription.content?d.metaDescription.length+' characters':'')+'&nbsp;&nbsp;Ideal: 70&ndash;160 chars</div>'+
     '</div>'+
 
-    /* Canonical */
     '<div class="card">'+
-      '<div class="ch"><div class="ct">Canonical URL</div>'+
-        (d.canonical?B('g','SET \u2713'):B('y','MISSING'))+'</div>'+
-      '<div class="content-val '+(d.canonical?'':'miss')+'">'+
-        (d.canonical?'<a href="'+escH(d.canonical)+'" target="_blank" rel="noopener" style="color:var(--acc);word-break:break-all">'+escH(d.canonical)+'</a>':'No canonical link tag &mdash; duplicate content risk')+
-      '</div>'+
+      '<div class="ch"><div class="ct">Canonical & Lang</div></div>'+
+      '<ul class="kv">'+
+        '<li><span class="kv-k">Canonical URL</span><span class="kv-v '+(d.canonical?'ok':'warn')+'">'+escH(d.canonical||'Not set — duplicate content risk')+'</span></li>'+
+        '<li><span class="kv-k">Language</span><span class="kv-v '+(d.lang?'ok':'warn')+'">'+escH(d.lang||'Not set')+'</span></li>'+
+        '<li><span class="kv-k">Charset</span><span class="kv-v">'+escH(d.charset||'Not declared')+'</span></li>'+
+        '<li><span class="kv-k">Viewport</span><span class="kv-v '+(d.viewport?'ok':'bad')+'">'+escH(d.viewport||'MISSING')+'</span></li>'+
+        '<li><span class="kv-k">Robots meta</span><span class="kv-v">'+escH(d.metaRobots||'Not set (defaults to index,follow)')+'</span></li>'+
+        '<li><span class="kv-k">Favicon</span><span class="kv-v '+(d.favicon?'ok':'warn')+'">'+(d.favicon?'Yes \u2713':'Not found')+'</span></li>'+
+      '</ul>'+
     '</div>'+
 
-    /* Meta Robots */
     '<div class="card">'+
-      '<div class="ch"><div class="ct">Meta Robots</div>'+
-        (d.metaRobots?B('b','SET'):B('m','DEFAULT'))+'</div>'+
-      '<div class="content-val '+(d.metaRobots?'':'miss')+'">'+
-        (d.metaRobots?escH(d.metaRobots):'Not set &mdash; defaults to index, follow')+
-      '</div>'+
+      '<div class="ch"><div class="ct">Keyword Analysis</div>'+
+      (keyword?B('b',keyword):'')+'</div>'+
+      kwSnippetHtml()+
     '</div>'+
 
   '</div>'+
 
-  /* ── PAGE ATTRIBUTES ── */
-  '<div class="sec">Page Attributes</div>'+
+  '<div class="sec">Readability</div>'+
   '<div class="grid">'+
-
-    '<div class="card"><div class="ch"><div class="ct">Language</div>'+
-      (d.lang?B('g',d.lang):B('y','MISSING'))+'</div>'+
-      '<div class="content-val '+(d.lang?'':'miss')+'">'+
-        (d.lang?'<code style="font-family:var(--mono);color:var(--acc)">&lt;html lang="'+escH(d.lang)+'"&gt;</code>':'html[lang] attribute missing')+
-      '</div></div>'+
-
-    '<div class="card"><div class="ch"><div class="ct">Protocol</div>'+
-      (d.protocol==='https:'?B('g','HTTPS \u2713'):B('r','HTTP'))+'</div>'+
-      '<div class="content-val">'+escH(d.protocol||'\u2014')+' / '+escH(d.hostname)+
-        (d.protocol!=='https:'?'<div style="color:var(--red);font-size:11px;margin-top:4px">\u26a0 HTTP is a ranking signal penalty \u2014 migrate to HTTPS</div>':'')+
-      '</div></div>'+
-
-    '<div class="card"><div class="ch"><div class="ct">Viewport Meta</div>'+
-      (d.viewport?B('g','SET \u2713'):B('r','MISSING'))+'</div>'+
-      '<div class="content-val '+(d.viewport?'':'miss')+'">'+
-        (d.viewport?escH(d.viewport):'No viewport tag \u2014 page will not be mobile-friendly')+
-      '</div></div>'+
-
-    '<div class="card"><div class="ch"><div class="ct">Charset</div>'+
-      (d.charset?B('g',d.charset):B('y','UNDETECTED'))+'</div>'+
-      '<div class="content-val '+(d.charset?'':'miss')+'">'+
-        (d.charset?'<code style="font-family:var(--mono);color:var(--acc)">&lt;meta charset="'+escH(d.charset)+'"&gt;</code>':'Charset declaration not found')+
-      '</div></div>'+
-
-    '<div class="card"><div class="ch"><div class="ct">Favicon</div>'+
-      (d.favicon?B('g','FOUND \u2713'):B('y','MISSING'))+'</div>'+
-      '<div class="content-val">'+(d.favicon?'Favicon link tag is present in &lt;head&gt;':'No favicon link tag detected')+'</div></div>'+
-
-    (d.generator?
-      '<div class="card"><div class="ch"><div class="ct">CMS / Generator</div>'+B('b','DETECTED')+'</div>'+
-      '<div class="content-val">'+escH(d.generator)+'</div></div>':'')+
-
+    '<div class="card c2"><div class="ch"><div class="ct">Flesch-Kincaid Readability</div>'+B('b','Flesch Reading Ease')+'</div>'+
+      readabilityHtml()+'</div>'+
+    '<div class="card"><div class="ch"><div class="ct">Content Stats</div></div>'+
+      '<ul class="kv">'+
+        '<li><span class="kv-k">Word count</span><span class="kv-v '+(d.wordCount<300?'warn':d.wordCount>=600?'ok':'')+'">'+d.wordCount.toLocaleString()+(d.wordCount<300?' \u26a0 Too thin':'')+'</span></li>'+
+        '<li><span class="kv-k">HTML size</span><span class="kv-v '+(parseFloat(htmlSizeKb)>200?'warn':'ok')+'">'+htmlSizeKb+' KB</span></li>'+
+        '<li><span class="kv-k">Inline styles</span><span class="kv-v">'+d.inlineStyles+'</span></li>'+
+        '<li><span class="kv-k">Inline scripts</span><span class="kv-v">'+d.inlineScripts+'</span></li>'+
+      '</ul>'+
+    '</div>'+
   '</div>'+
 
-  /* ── CONTENT ── */
-  '<div class="sec">Content &amp; Keywords</div>'+
-  '<div class="grid">'+
-
-    '<div class="card"><div class="ch"><div class="ct">Word Count</div>'+
-      (d.wordCount<300?B('r','LOW'):d.wordCount<600?B('y','THIN'):B('g','OK'))+'</div>'+
-      '<div class="val big">'+d.wordCount.toLocaleString()+'</div>'+
-      '<div class="sub">Visible body words &nbsp;&middot;&nbsp; Ideal: 600+ for articles, 300+ minimum</div></div>'+
-
-    '<div class="card"><div class="ch"><div class="ct">Keyword Density'+(keyword?' &mdash; &ldquo;'+escH(keyword)+'&rdquo;':'')+'</div></div>'+
-      kwSnippetHtml()+'</div>'+
-
-    '<div class="card"><div class="ch"><div class="ct">HTML Page Size</div>'+B('m','INFO')+'</div>'+
-      '<div class="val big" style="font-size:26px">'+htmlSizeKb+' KB</div>'+
-      '<div class="sub">Raw HTML bytes &nbsp;&middot;&nbsp; Ideal: under 100 KB for fast TTFB</div></div>'+
-
-  '</div>'+
-
-  /* ── HEADINGS ── */
   '<div class="sec">Headings Structure</div>'+
   '<div class="grid">'+
-
     '<div class="card"><div class="ch"><div class="ct">H1&ndash;H6 Distribution</div>'+
       (d.headingCounts.h1===0?B('r','NO H1'):d.headingCounts.h1===1?B('g','1 H1 \u2713'):B('y',d.headingCounts.h1+' H1s'))+'</div>'+
       '<div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:4px">'+
@@ -953,33 +1600,27 @@ function render(d, pageUrl, keyword, proxy){
           return '<div style="text-align:center"><div style="font-family:var(--mono);font-size:24px;font-weight:700;color:'+col+'">'+n+'</div><div class="sub">H'+i+'</div></div>';
         }).join('')+
       '</div></div>'+
-
     '<div class="card c2"><div class="ch"><div class="ct">All Heading Texts</div>'+B('b',totalH+' total')+'</div>'+
       headingsHtml()+'</div>'+
-
   '</div>'+
 
-  /* ── IMAGES ── */
   '<div class="sec">Images &mdash; All '+d.images.total+' Found</div>'+
   '<div class="grid">'+
-
     '<div class="card"><div class="ch"><div class="ct">Image Stats</div>'+B('b',d.images.total+' total')+'</div>'+
       '<ul class="kv">'+
         '<li><span class="kv-k">Total images</span><span class="kv-v">'+d.images.total+'</span></li>'+
-        '<li><span class="kv-k">Missing alt attr</span><span class="kv-v '+(d.images.missingAlt>0?'bad':'ok')+'">'+d.images.missingAlt+(d.images.missingAlt>0?' \u26a0 accessibility &amp; SEO issue':'')+'</span></li>'+
+        '<li><span class="kv-k">Missing alt</span><span class="kv-v '+(d.images.missingAlt>0?'bad':'ok')+'">'+d.images.missingAlt+(d.images.missingAlt>0?' \u26a0 SEO &amp; a11y issue':'')+'</span></li>'+
         '<li><span class="kv-k">Empty alt=""</span><span class="kv-v '+(d.images.emptyAlt>0?'warn':'ok')+'">'+d.images.emptyAlt+'</span></li>'+
+        '<li><span class="kv-k">Without lazy load</span><span class="kv-v '+(d.images.noLazy>3?'warn':'ok')+'">'+d.images.noLazy+'</span></li>'+
+        '<li><span class="kv-k">No width/height</span><span class="kv-v '+(d.images.noWidthHeight>3?'warn':'ok')+'">'+d.images.noWidthHeight+' (CLS risk)</span></li>'+
         (d.images.kwInAlt!==null?'<li><span class="kv-k">Alt with keyword</span><span class="kv-v">'+d.images.kwInAlt+'</span></li>':'')+
       '</ul></div>'+
-
     '<div class="card c2"><div class="ch"><div class="ct">Every Image: src &amp; alt text</div></div>'+
       imagesHtml()+'</div>'+
-
   '</div>'+
 
-  /* ── LINKS ── */
   '<div class="sec">Links &mdash; All '+d.links.total+' Anchors</div>'+
   '<div class="grid">'+
-
     '<div class="card"><div class="ch"><div class="ct">Link Summary</div>'+B('b',d.links.total+' total')+'</div>'+
       '<ul class="kv">'+
         '<li><span class="kv-k">Total &lt;a&gt; links</span><span class="kv-v">'+d.links.total+'</span></li>'+
@@ -987,69 +1628,139 @@ function render(d, pageUrl, keyword, proxy){
         '<li><span class="kv-k">External links</span><span class="kv-v">'+d.links.external+'</span></li>'+
         '<li><span class="kv-k">Nofollow links</span><span class="kv-v">'+d.links.nofollow+'</span></li>'+
       '</ul></div>'+
-
-    '<div class="card c2"><div class="ch"><div class="ct">Internal Links (up to 30)</div>'+B('g',d.links.internal+' found')+'</div>'+
-      linksTableHtml(d.links.internalList,'ilx')+'</div>'+
-
-    '<div class="card c3"><div class="ch"><div class="ct">External Links (up to 30)</div>'+B('b',d.links.external+' found')+'</div>'+
-      linksTableHtml(d.links.externalList,'elx')+'</div>'+
-
+    '<div class="card c2"><div class="ch"><div class="ct">Internal Links (up to 30)</div>'+B('g',d.links.internal+' found')+'</div>'+linksTableHtml(d.links.internalList,'ilx')+'</div>'+
+    '<div class="card c3"><div class="ch"><div class="ct">External Links (up to 30)</div>'+B('b',d.links.external+' found')+'</div>'+linksTableHtml(d.links.externalList,'elx')+'</div>'+
   '</div>'+
 
-  /* ── STRUCTURED DATA ── */
   '<div class="sec">Structured Data</div>'+
   '<div class="grid">'+
-
-    '<div class="card"><div class="ch"><div class="ct">Summary</div>'+
-      (d.structuredData.jsonLd+d.structuredData.microdata>0?B('g','FOUND \u2713'):B('y','NONE'))+'</div>'+
+    '<div class="card"><div class="ch"><div class="ct">Summary</div>'+(d.structuredData.jsonLd+d.structuredData.microdata>0?B('g','FOUND \u2713'):B('y','NONE'))+'</div>'+
       '<ul class="kv">'+
         '<li><span class="kv-k">JSON-LD blocks</span><span class="kv-v '+(d.structuredData.jsonLd>0?'ok':'warn')+'">'+d.structuredData.jsonLd+'</span></li>'+
         '<li><span class="kv-k">Microdata items</span><span class="kv-v">'+d.structuredData.microdata+'</span></li>'+
-      '</ul></div>'+
-
-    '<div class="card c2"><div class="ch"><div class="ct">JSON-LD Content (full)</div></div>'+
-      jldHtml()+'</div>'+
-
+      '</ul>'+
+      '<div style="margin-top:10px;font-size:10px;color:var(--txt2)">Structured data enables rich results in Google: star ratings, FAQs, breadcrumbs, events and more.</div>'+
+    '</div>'+
+    '<div class="card c2"><div class="ch"><div class="ct">JSON-LD Content (full)</div></div>'+jldHtml()+'</div>'+
   '</div>'+
 
-  /* ── SOCIAL META ── */
-  '<div class="sec">Open Graph &amp; Twitter Cards</div>'+
+  '</div>'+ /* end tab-seo */
+
+  /* ====== SECURITY TAB ====== */
+  '<div class="tab-pane" id="tab-security">'+
+
+  '<div class="sec">Security Headers (from HTML)</div>'+
   '<div class="grid">'+
-    '<div class="card c3"><div class="ch"><div class="ct">All Social Meta Tags</div>'+
-      '<div class="bgs">'+
-        (d.openGraph.title?B('g','OG \u2713'):B('y','OG \u2717'))+' '+
-        (d.twitter.card?B('g','TW \u2713'):B('y','TW \u2717'))+
-      '</div></div>'+
-      socialHtml()+
+    '<div class="card c3"><div class="ch"><div class="ct">Detectable Security Meta Tags &amp; HTTPS</div>'+
+      B(secSc.score>=80?'g':secSc.score>=50?'y':'r','Score: '+secSc.score+'/100')+'</div>'+
+      secHeadersHtml()+
+      '<div style="margin-top:10px;font-size:10px;color:var(--mut)">&#9432; HTTP-level security headers (X-Content-Type-Options, HSTS, Permissions-Policy) are set by your web server and cannot be read from HTML. Check your server config or CDN settings to verify and add these.</div>'+
     '</div>'+
   '</div>'+
 
-  /* ── ALL META TAGS ── */
-  '<div class="sec">All Meta Tags on Page</div>'+
+  '<div class="sec">XSS &amp; Code Security</div>'+
   '<div class="grid">'+
-    '<div class="card c3"><div class="ch"><div class="ct">Complete &lt;meta&gt; tag inventory</div>'+B('m',d.allMeta.length+' tags')+'</div>'+
-      allMetaHtml()+
+    '<div class="card c3"><div class="ch"><div class="ct">Dangerous Patterns &amp; Sensitive Data</div>'+
+      (d.security.dangerousJs&&d.security.dangerousJs.count>0?B('r','ISSUES FOUND'):B('g','Clean \u2713'))+
+    '</div>'+dangerousPatternsHtml()+'</div>'+
+  '</div>'+
+
+  '<div class="sec">Third-Party Scripts & SRI</div>'+
+  '<div class="grid">'+
+    '<div class="card c3"><div class="ch"><div class="ct">External Scripts (Subresource Integrity)</div>'+
+      (d.security.thirdPartyScripts&&d.security.thirdPartyScripts.missingIntegrity>0?B('y',d.security.thirdPartyScripts.missingIntegrity+' missing SRI'):B('g','All have SRI or none'))+'</div>'+
+      sriHtml()+
+      '<div style="margin-top:8px;font-size:10px;color:var(--mut)">SRI hashes verify external scripts haven\'t been tampered with. Add an <code style="font-family:var(--mono);background:rgba(0,0,0,.3);padding:1px 4px;border-radius:3px">integrity</code> attribute with a SHA-384 hash to every third-party script tag.</div>'+
     '</div>'+
   '</div>'+
 
-  /* ── CSS FILES ── */
+  '<div class="sec">Forms & iFrames</div>'+
+  '<div class="grid">'+
+    '<div class="card"><div class="ch"><div class="ct">Forms Security</div>'+
+      (d.security.forms&&d.security.forms.insecure>0?B('r',d.security.forms.insecure+' insecure'):B('g',d.security.forms.total+' forms'))+'</div>'+
+      '<ul class="kv">'+
+        '<li><span class="kv-k">Total forms</span><span class="kv-v">'+d.security.forms.total+'</span></li>'+
+        '<li><span class="kv-k">Insecure action</span><span class="kv-v '+(d.security.forms.insecure>0?'bad':'ok')+'">'+d.security.forms.insecure+(d.security.forms.insecure>0?' \u26a0 POST to HTTP':'')+'</span></li>'+
+        '<li><span class="kv-k">Password fields</span><span class="kv-v">'+d.security.passwordFields.total+'</span></li>'+
+      '</ul>'+
+    '</div>'+
+    '<div class="card c2"><div class="ch"><div class="ct">iFrame Sandbox Analysis</div>'+
+      (d.security.iframes&&d.security.iframes.unsandboxed>0?B('y',d.security.iframes.unsandboxed+' unsandboxed'):B('g',d.security.iframes.total+' iframes'))+'</div>'+
+      iframeHtml()+'</div>'+
+  '</div>'+
+
+  '<div class="sec">HTML Comments &amp; Server Fingerprinting</div>'+
+  '<div class="grid">'+
+    '<div class="card"><div class="ch"><div class="ct">Tech Stack Leakage</div></div>'+
+      '<ul class="kv">'+
+        '<li><span class="kv-k">Generator tag</span><span class="kv-v '+(d.security.generatorLeaking?'warn':'ok')+'">'+escH(d.security.generatorLeaking||'Not found \u2713')+'</span></li>'+
+        '<li><span class="kv-k">Mixed content</span><span class="kv-v '+(d.mixedContent&&d.mixedContent.length>0?'bad':'ok')+'">'+((d.mixedContent&&d.mixedContent.length)||0)+(d.mixedContent&&d.mixedContent.length>0?' HTTP resources on HTTPS':' issues')+'</span></li>'+
+      '</ul>'+
+    '</div>'+
+    '<div class="card c2"><div class="ch"><div class="ct">HTML Comments ('+d.security.htmlComments.count+' found)</div>'+
+      (d.security.htmlComments.count>0?B('y',d.security.htmlComments.count+' comments'):B('g','None'))+'</div>'+
+      htmlCommentsHtml()+
+      '<div style="margin-top:8px;font-size:10px;color:var(--mut)">HTML comments can accidentally expose internal paths, credentials, version info, or developer notes to anyone who views page source.</div>'+
+    '</div>'+
+  '</div>'+
+
+  '<div class="sec">Domain & IP Information</div>'+
+  '<div class="grid">'+
+    '<div class="card"><div class="ch"><div class="ct">Server / Domain Info</div>'+B('b','ipapi.co')+'</div>'+
+      ipInfoHtml()+
+    '</div>'+
+    '<div class="card"><div class="ch"><div class="ct">Protocol & Connection</div></div>'+
+      '<ul class="kv">'+
+        '<li><span class="kv-k">Protocol</span><span class="kv-v '+(d.protocol==='https:'?'ok':'bad')+'">'+escH(d.protocol||'unknown')+(d.protocol==='https:'?' \u2713 Secure':' \u26a0 Insecure')+'</span></li>'+
+        '<li><span class="kv-k">Hostname</span><span class="kv-v">'+escH(d.hostname||'—')+'</span></li>'+
+        '<li><span class="kv-k">Hreflang</span><span class="kv-v">'+d.hreflang.length+' tags</span></li>'+
+        '<li><span class="kv-k">Mixed content</span><span class="kv-v '+(d.mixedContent.length>0?'bad':'ok')+'">'+d.mixedContent.length+' issues</span></li>'+
+      '</ul>'+
+    '</div>'+
+    '<div class="card"><div class="ch"><div class="ct">Server-Level Headers</div></div>'+
+      '<div style="font-size:12px;color:var(--txt2);line-height:1.7">These critical headers must be set in your web server or CDN configuration — they are not visible in HTML source but are essential for a hardened security posture:<br><br>'+
+      '<div style="font-family:var(--mono);font-size:10px;margin-top:8px;display:flex;flex-direction:column;gap:5px">'+
+      '<span style="color:var(--grn)">X-Content-Type-Options: nosniff</span>'+
+      '<span style="color:var(--grn)">Strict-Transport-Security: max-age=31536000</span>'+
+      '<span style="color:var(--grn)">Permissions-Policy: camera=(), microphone=()</span>'+
+      '<span style="color:var(--grn)">X-XSS-Protection: 1; mode=block</span>'+
+      '</div>'+
+      '</div>'+
+    '</div>'+
+  '</div>'+
+
+  '</div>'+ /* end tab-security */
+
+  /* ====== NEXT STEPS TAB ====== */
+  '<div class="tab-pane" id="tab-nextsteps">'+
+  nextStepsHtml()+
+  '</div>'+
+
+  /* ====== RECOMMENDATIONS TAB ====== */
+  '<div class="tab-pane" id="tab-recs">'+
+  '<div class="sec">Actionable Fixes &mdash; '+recs.length+' Recommendations</div>'+
+  '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px">'+
+    (recs.filter(function(r){return r.level==='critical';}).length?B('r',recs.filter(function(r){return r.level==='critical';}).length+' Critical'):'')+'  '+
+    (recs.filter(function(r){return r.level==='warning';}).length?B('y',recs.filter(function(r){return r.level==='warning';}).length+' Warnings'):'')+'  '+
+    (recs.filter(function(r){return r.level==='info';}).length?B('b',recs.filter(function(r){return r.level==='info';}).length+' Improvements'):'')+'  '+
+  '</div>'+
+  recsHtml()+
+  '</div>'+
+
+  /* ====== TECHNICAL TAB ====== */
+  '<div class="tab-pane" id="tab-technical">'+
+
   '<div class="sec">External CSS Files &mdash; '+d.cssFiles.length+' found</div>'+
   '<div class="grid">'+
-    '<div class="card c3"><div class="ch"><div class="ct">Stylesheet URLs</div>'+B('m',d.cssFiles.length+' files')+'</div>'+
-      cssHtml()+
-    '</div>'+
+    '<div class="card c3"><div class="ch"><div class="ct">Stylesheet URLs</div>'+B('m',d.cssFiles.length+' files')+'</div>'+cssHtml()+'</div>'+
   '</div>'+
 
-  /* ── JS FILES ── */
   '<div class="sec">External JavaScript Files &mdash; '+d.jsFiles.length+' found</div>'+
   '<div class="grid">'+
-    '<div class="card c3"><div class="ch"><div class="ct">Script src URLs</div>'+B('m',d.jsFiles.length+' files')+'</div>'+
-      jsHtml()+
-    '</div>'+
+    '<div class="card c3"><div class="ch"><div class="ct">Script src URLs</div>'+B('m',d.jsFiles.length+' files')+'</div>'+jsHtml()+'</div>'+
   '</div>'+
 
-  /* ── TECHNICAL ── */
-  '<div class="sec">Technical</div>'+
+  '<div class="sec">Technical Details</div>'+
   '<div class="grid">'+
 
     '<div class="card"><div class="ch"><div class="ct">Resource Counts</div>'+B('m','INFO')+'</div>'+
@@ -1062,31 +1773,75 @@ function render(d, pageUrl, keyword, proxy){
         '<li><span class="kv-k">DNS prefetch</span><span class="kv-v">'+d.dnsPrefetch.length+'</span></li>'+
       '</ul></div>'+
 
-    '<div class="card"><div class="ch"><div class="ct">Preload Links</div>'+
-      (d.preloadLinks.length?B('b',d.preloadLinks.length+' hints'):B('m','NONE'))+'</div>'+
-      preloadHtml()+'</div>'+
+    '<div class="card"><div class="ch"><div class="ct">Mixed Content (HTTP on HTTPS)</div>'+(d.mixedContent.length>0?B('r',d.mixedContent.length+' issues'):B('g','CLEAN \u2713'))+'</div>'+mixedHtml()+'</div>'+
 
-    '<div class="card"><div class="ch"><div class="ct">DNS Prefetch</div>'+
-      (d.dnsPrefetch.length?B('b',d.dnsPrefetch.length+' hosts'):B('m','NONE'))+'</div>'+
-      dnsHtml()+'</div>'+
+    '<div class="card"><div class="ch"><div class="ct">hreflang / Internationalization</div>'+(d.hreflang&&d.hreflang.length>0?B('g',d.hreflang.length+' tags'):B('m','NONE'))+'</div>'+hreflangHtml()+'</div>'+
 
-    '<div class="card c3"><div class="ch"><div class="ct">Mixed Content (HTTP on HTTPS)</div>'+
-      (d.mixedContent.length>0?B('r',d.mixedContent.length+' issues'):B('g','CLEAN \u2713'))+'</div>'+
-      mixedHtml()+'</div>'+
+  '</div>'+
 
-    '<div class="card c3"><div class="ch"><div class="ct">hreflang / Internationalization</div>'+
-      (d.hreflang&&d.hreflang.length>0?B('g',d.hreflang.length+' tags'):B('m','NONE'))+'</div>'+
-      hreflangHtml()+'</div>'+
+  '</div>'+ /* end tab-technical */
 
-  '</div>';
+  /* ====== SOCIAL TAB ====== */
+  '<div class="tab-pane" id="tab-social">'+
+
+  '<div class="sec">Open Graph &amp; Twitter Cards</div>'+
+  '<div class="grid">'+
+    '<div class="card c3"><div class="ch"><div class="ct">All Social Meta Tags</div>'+
+      '<div class="bgs">'+(d.openGraph.title?B('g','OG \u2713'):B('y','OG \u2717'))+' '+(d.twitter.card?B('g','TW \u2713'):B('y','TW \u2717'))+'</div></div>'+
+      socialHtml()+'</div>'+
+  '</div>'+
+
+  '<div class="sec">All Meta Tags on Page</div>'+
+  '<div class="grid">'+
+    '<div class="card c3"><div class="ch"><div class="ct">Complete &lt;meta&gt; tag inventory</div>'+B('m',d.allMeta.length+' tags')+'</div>'+allMetaHtml()+'</div>'+
+  '</div>'+
+
+  '</div>'; /* end tab-social */
 
   gid('results').innerHTML=html;
   gid('results').style.display='block';
 }
 
 /* ============================================================
-   TOGGLE EXPAND
+   TAB SWITCHING
 ============================================================ */
+function switchTab(name, btn){
+  var panes=document.querySelectorAll('.tab-pane');
+  Array.prototype.forEach.call(panes,function(p){p.classList.remove('active');});
+  var active=document.getElementById('tab-'+name);
+  if(active)active.classList.add('active');
+  var btns=document.querySelectorAll('.tab-btn');
+  Array.prototype.forEach.call(btns,function(b){b.classList.remove('active');});
+  if(btn)btn.classList.add('active');
+}
+
+/* ============================================================
+   CHECKLIST TOGGLE
+============================================================ */
+function toggleChk(el){
+  el.classList.toggle('checked');
+  var box=el.querySelector('.chk-box');
+  var pri=el.querySelector('.chk-pri');
+  if(el.classList.contains('checked')){
+    if(box)box.textContent='\u2713';
+    if(pri){
+      el.setAttribute('data-pri-orig',pri.className+'||'+pri.textContent);
+      pri.textContent='DONE';
+      pri.className='chk-pri';
+      pri.style.cssText='background:rgba(0,208,132,.1);color:var(--grn);border:1px solid rgba(0,208,132,.2)';
+    }
+  }else{
+    if(box)box.textContent='';
+    if(pri){
+      var orig=(el.getAttribute('data-pri-orig')||'').split('||');
+      pri.className=orig[0]||'chk-pri pri-later';
+      pri.textContent=orig[1]||'LATER';
+      pri.style.cssText='';
+    }
+  }
+}
+
+
 function toggleX(id){
   var el=gid(id);if(!el)return;
   var open=el.classList.toggle('open');
@@ -1104,7 +1859,7 @@ var _data=null,_url=null;
 function doExport(){
   if(!_data)return;
   var blob=new Blob([JSON.stringify({url:_url,analyzedAt:new Date().toISOString(),data:_data},null,2)],{type:'application/json'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='seo-analysis.json';
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='seo-security-analysis.json';
   document.body.appendChild(a);a.click();document.body.removeChild(a);
   setTimeout(function(){URL.revokeObjectURL(a.href);},5000);
 }
@@ -1112,13 +1867,16 @@ function doExport(){
 function doCopy(){
   if(!_data)return;
   var d=_data;
+  var sc=calcScore(d);
+  var secSc=calcSecurityScore(d.security);
   var lines=[
     '==========================================',
-    '  SEO Analysis Report',
+    '  SEO + Security Analysis Report',
     '==========================================',
-    'URL:      '+_url,
-    'Date:     '+new Date().toISOString(),
-    'Score:    '+calcScore(d).score+'/100',
+    'URL:        '+_url,
+    'Date:       '+new Date().toISOString(),
+    'SEO Score:  '+sc.score+'/100',
+    'Sec Score:  '+secSc.score+'/100',
     '',
     '── TITLE ──────────────────────────────────',
     (d.title.content||'MISSING')+' ('+d.title.length+' chars)',
@@ -1126,52 +1884,21 @@ function doCopy(){
     '── META DESCRIPTION ───────────────────────',
     (d.metaDescription.content||'MISSING')+' ('+d.metaDescription.length+' chars)',
     '',
-    '── CANONICAL ──────────────────────────────',
-    d.canonical||'Not set',
-    '',
-    '── ATTRIBUTES ─────────────────────────────',
-    'Lang:     '+(d.lang||'Not set'),
-    'Robots:   '+(d.metaRobots||'Not set'),
-    'Viewport: '+(d.viewport||'MISSING'),
-    'Charset:  '+(d.charset||'Not found'),
-    'Protocol: '+(d.protocol||'?'),
-    'Favicon:  '+(d.favicon?'Yes':'No'),
+    '── SECURITY ───────────────────────────────',
+    'HTTPS:      '+(d.security.isHttps?'Yes':'NO'),
+    'CSP meta:   '+(d.security.cspMeta||'Not set'),
+    'X-Frame:    '+(d.security.xFrameMeta||'Not set'),
+    'Referrer:   '+(d.security.referrerMeta||'Not set'),
+    'HSTS(meta): '+(d.security.hasHsts?'Present':'Not set'),
+    'Dangerous JS:'+(d.security.dangerousJs.issues.join(',')||'None'),
+    'SRI missing: '+(d.security.thirdPartyScripts.missingIntegrity),
     '',
     '── CONTENT ────────────────────────────────',
     'Words: '+d.wordCount,
-    d.keywordDensity?'KW Density: '+d.keywordDensity.density+'% ('+d.keywordDensity.count+' occurrences)':'No keyword set',
+    d.readability?'Readability: '+d.readability.score+'/100 ('+d.readability.grade+')':'No readability data',
     '',
     '── HEADINGS ───────────────────────────────',
     [1,2,3,4,5,6].map(function(i){return 'H'+i+': '+d.headingCounts['h'+i];}).join('  '),
-    'H1 texts: '+d.headings.h1.join(' | '),
-    '',
-    '── IMAGES ─────────────────────────────────',
-    'Total: '+d.images.total+' | Missing alt: '+d.images.missingAlt+' | Empty alt: '+d.images.emptyAlt,
-    '',
-    '── LINKS ──────────────────────────────────',
-    'Total: '+d.links.total+' | Internal: '+d.links.internal+' | External: '+d.links.external+' | Nofollow: '+d.links.nofollow,
-    '',
-    '── STRUCTURED DATA ────────────────────────',
-    'JSON-LD: '+d.structuredData.jsonLd+' | Microdata: '+d.structuredData.microdata,
-    d.structuredData.items.map(function(i){return '  - '+i.type;}).join('\n'),
-    '',
-    '── OPEN GRAPH ─────────────────────────────',
-    'og:title: '+(d.openGraph.title||'MISSING'),
-    'og:description: '+(d.openGraph.description||'MISSING'),
-    'og:image: '+(d.openGraph.image||'MISSING'),
-    'og:url: '+(d.openGraph.url||'MISSING'),
-    '',
-    '── TWITTER ────────────────────────────────',
-    'twitter:card: '+(d.twitter.card||'MISSING'),
-    'twitter:title: '+(d.twitter.title||'MISSING'),
-    'twitter:image: '+(d.twitter.image||'MISSING'),
-    '',
-    '── TECHNICAL ──────────────────────────────',
-    'CSS files: '+d.cssFiles.length+' | JS files: '+d.jsFiles.length,
-    'Inline styles: '+d.inlineStyles+' | Inline scripts: '+d.inlineScripts,
-    'Mixed content: '+d.mixedContent.length,
-    'HTML size: '+(d.htmlSize/1024).toFixed(1)+' KB',
-    'Hreflang tags: '+d.hreflang.length,
   ].filter(function(l){return l!==undefined&&l!==null;}).join('\n');
 
   var btn=gid('copybtn');
@@ -1205,18 +1932,31 @@ function run(){
   var btn=gid('go');btn.disabled=true;btn.textContent='ANALYZING\u2026';
   initDots();
 
-  fetchPage(pageUrl)
-    .then(function(res){
+  var hostname='';
+  try{hostname=new URL(pageUrl).hostname;}catch(e){}
+
+  // Fetch page HTML + optional security/IP data in parallel
+  var htmlPromise=fetchPage(pageUrl);
+  var ipPromise=hostname?fetchIpInfo(hostname):Promise.resolve(null);
+
+  setStatus('Fetching page & running parallel checks\u2026');
+
+  Promise.all([htmlPromise, ipPromise])
+    .then(function(results){
+      var res=results[0];
+      var ipData=results[1];
       setStatus('Parsing '+((res.html.length/1024).toFixed(0))+' KB of HTML\u2026');
-      return new Promise(function(ok){setTimeout(function(){ok(res);},40);});
+      return new Promise(function(ok){setTimeout(function(){ok({res:res,ipData:ipData});},40);});
     })
-    .then(function(res){
+    .then(function(obj){
+      var res=obj.res;
+      var ipData=obj.ipData;
       var data;
       try{data=analyze(res.html,pageUrl,keyword);}
       catch(e){throw new Error('Analysis error: '+e.message);}
       _data=data;_url=pageUrl;
       hideStatus();
-      render(data,pageUrl,keyword,res.proxy);
+      render(data,pageUrl,keyword,res.proxy,null,ipData);
       gid('results').scrollIntoView({behavior:'smooth',block:'start'});
     })
     .catch(function(e){
